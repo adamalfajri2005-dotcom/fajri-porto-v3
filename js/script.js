@@ -1,8 +1,19 @@
 gsap.registerPlugin(ScrollTrigger);
 
+const cursor = document.getElementById("cursor");
+if (cursor && window.matchMedia("(min-width: 768px)").matches) {
+  document.addEventListener("mousemove", (e) => {
+    gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1 });
+  });
+  const hoverTargets = document.querySelectorAll(".hoverable, a");
+  hoverTargets.forEach((el) => {
+    el.addEventListener("mouseenter", () => cursor.classList.add("hovered"));
+    el.addEventListener("mouseleave", () => cursor.classList.remove("hovered"));
+  });
+}
+
 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const scrambleElements = document.querySelectorAll(".scramble-hover");
-
 if (scrambleElements.length > 0) {
   scrambleElements.forEach((item) => {
     item.onmouseover = (event) => {
@@ -171,17 +182,5 @@ if (
     row.addEventListener("mouseleave", () => {
       gsap.to(revealImg, { opacity: 0, scale: 0.8, duration: 0.3 });
     });
-  });
-}
-
-const cursor = document.getElementById("cursor");
-if (cursor && window.matchMedia("(min-width: 768px)").matches) {
-  document.addEventListener("mousemove", (e) => {
-    gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1 });
-  });
-  const hoverTargets = document.querySelectorAll(".hoverable, a");
-  hoverTargets.forEach((el) => {
-    el.addEventListener("mouseenter", () => cursor.classList.add("hovered"));
-    el.addEventListener("mouseleave", () => cursor.classList.remove("hovered"));
   });
 }
