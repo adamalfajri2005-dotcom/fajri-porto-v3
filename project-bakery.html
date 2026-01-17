@@ -3,17 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project Details — Adam Alfajri</title>
+    <title>Bakery DB — Adam Alfajri</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=clash-display@400,500,600,700&display=swap"
       rel="stylesheet"
     />
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Satoshi", "sans-serif"],
+              display: ["Clash Display", "sans-serif"],
+            },
+            colors: {
+              void: "#050505",
+              paper: "#E1E1E1",
+              mist: "#666666",
+              accent: "#FF3300",
+            },
+          },
+        },
+      };
+    </script>
+
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body class="antialiased bg-void text-paper">
-    <div class="noise"></div>
     <div id="cursor"></div>
+    <div class="noise"></div>
 
     <nav
       class="fixed top-0 w-full px-8 py-8 flex justify-between items-center z-50 mix-blend-difference text-white"
@@ -29,14 +50,14 @@
     </nav>
 
     <main class="pt-32 px-8 md:px-24 pb-24">
-      <h1 class="font-display text-6xl md:text-8xl mb-8">PROJECT TITLE</h1>
+      <h1 class="font-display text-6xl md:text-8xl mb-8">BAKERY DB</h1>
 
       <div class="flex gap-4 font-mono text-xs text-accent mb-16">
         <span class="border border-white/20 px-3 py-1 rounded-full"
           >YEAR: 2026</span
         >
         <span class="border border-white/20 px-3 py-1 rounded-full"
-          >ROLE: ENGINEER</span
+          >ROLE: DATABASE ENGINEER</span
         >
       </div>
 
@@ -44,7 +65,7 @@
         <img
           src="assets/p2.jpg"
           class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700"
-          alt="Project Image"
+          alt="Bakery Project"
         />
       </div>
 
@@ -54,21 +75,22 @@
         </div>
         <div class="md:col-span-8">
           <p class="text-mist text-lg leading-relaxed mb-8">
-            Describe the project here. Explain what the problem was and how you
-            solved it using code/leadership. (Tulis penjelasan project lu di
-            sini. Jelasin masalahnya apa dan gimana lu nyeleseinnya).
+            Designing a robust database system for a high-volume bakery.
+            Optimized SQL queries to handle inventory tracking and sales data in
+            real-time.
           </p>
           <div class="flex gap-4">
             <span class="text-xs font-mono text-white">STACK:</span>
-            <span class="text-xs font-mono text-mist"
-              >PYTHON / SQL / FIGMA</span
-            >
+            <span class="text-xs font-mono text-mist">ORACLE SQL / PL/SQL</span>
           </div>
         </div>
       </div>
     </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
     <script src="js/script.js"></script>
   </body>
 </html>
