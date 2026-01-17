@@ -1,10 +1,15 @@
 gsap.registerPlugin(ScrollTrigger);
 
 const cursor = document.getElementById("cursor");
-if (cursor && window.matchMedia("(min-width: 768px)").matches) {
+if (cursor) {
   document.addEventListener("mousemove", (e) => {
-    gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1 });
+    gsap.to(cursor, {
+      x: e.clientX,
+      y: e.clientY,
+      duration: 0.1,
+    });
   });
+
   const hoverTargets = document.querySelectorAll(".hoverable, a");
   hoverTargets.forEach((el) => {
     el.addEventListener("mouseenter", () => cursor.classList.add("hovered"));
