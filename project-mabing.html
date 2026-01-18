@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bakery DB — Adam Alfajri</title>
+    <title>HIMTI Mentoring — Adam Alfajri</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link
@@ -32,7 +32,9 @@
 
     <link rel="stylesheet" href="css/style.css" />
   </head>
-  <body class="antialiased bg-void text-paper">
+  <body
+    class="antialiased bg-void text-paper selection:bg-accent selection:text-white"
+  >
     <div id="cursor"></div>
     <div class="noise"></div>
 
@@ -42,46 +44,96 @@
       <a
         href="index.html"
         class="font-display font-bold text-xl tracking-widest hoverable"
+        style="text-decoration: none"
         >ADAM.</a
       >
-      <a href="index.html" class="font-mono text-xs tracking-widest hoverable"
+      <a
+        href="index.html"
+        class="font-mono text-xs tracking-widest hoverable"
+        style="text-decoration: none"
         >CLOSE [X]</a
       >
     </nav>
 
-    <main class="pt-32 px-8 md:px-24 pb-24">
-      <h1 class="font-display text-6xl md:text-8xl mb-8">BAKERY DB</h1>
+    <main class="pt-32 px-8 md:px-24 pb-24 max-w-[1600px] mx-auto">
+      <div class="mb-12 animate-fade-in">
+        <h1
+          class="font-display text-5xl md:text-8xl mb-6 leading-none uppercase"
+        >
+          HIMTI MENTORING
+        </h1>
 
-      <div class="flex gap-4 font-mono text-xs text-accent mb-16">
-        <span class="border border-white/20 px-3 py-1 rounded-full"
-          >YEAR: 2026</span
-        >
-        <span class="border border-white/20 px-3 py-1 rounded-full"
-          >ROLE: DATABASE ENGINEER</span
-        >
+        <div class="flex flex-wrap gap-4 font-mono text-xs text-accent">
+          <span class="border border-white/20 px-3 py-1 rounded-full"
+            >YEAR: 2024</span
+          >
+          <span class="border border-white/20 px-3 py-1 rounded-full"
+            >ROLE: PROJECT MANAGER</span
+          >
+        </div>
       </div>
 
-      <div class="w-full h-[60vh] bg-gray-800 mb-16 overflow-hidden rounded-lg">
+      <div
+        class="w-full h-[60vh] bg-white/5 mb-16 overflow-hidden rounded-lg border border-white/10 group"
+      >
         <img
           src="assets/p3.jpg"
-          class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700"
-          alt="Bakery Project"
+          class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+          alt="HIMTI Mentoring Atmosphere"
         />
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+      <div
+        class="grid grid-cols-1 md:grid-cols-12 gap-12 border-t border-white/10 pt-16"
+      >
         <div class="md:col-span-4">
-          <h3 class="font-display text-2xl mb-4">THE CHALLENGE</h3>
+          <h3 class="font-display text-3xl md:text-4xl mb-2">THE LEADERSHIP</h3>
+          <span class="font-mono text-xs text-accent tracking-widest"
+            >/// STRATEGIC ONBOARDING</span
+          >
         </div>
-        <div class="md:col-span-8">
-          <p class="text-mist text-lg leading-relaxed mb-8">
-            Designing a robust database system for a high-volume bakery.
-            Optimized SQL queries to handle inventory tracking and sales data in
-            real-time.
-          </p>
-          <div class="flex gap-4">
-            <span class="text-xs font-mono text-white">STACK:</span>
-            <span class="text-xs font-mono text-mist">ORACLE SQL / PL/SQL</span>
+
+        <div class="md:col-span-8 flex flex-col gap-10">
+          <div class="text-mist text-lg md:text-xl leading-relaxed font-light">
+            <p class="mb-6">
+              Orchestrated the massive onboarding program for
+              <strong>100+ Informatics Engineering freshmen</strong> at UIN
+              Syarif Hidayatullah Jakarta.
+            </p>
+            <p>
+              As the Project Manager, I led a specialized team to design a
+              curriculum focused on academic adaptation and campus culture. I
+              managed <strong>13 mentoring groups</strong>, acting as the bridge
+              between faculty and students. My role required high-stakes
+              <strong>crisis management</strong> and operational logistics to
+              maintain a supportive ecosystem.
+            </p>
+          </div>
+
+          <div class="border-t border-white/10 pt-8">
+            <span
+              class="font-mono text-xs text-white tracking-widest mb-6 block"
+              >MANAGEMENT FOCUS</span
+            >
+            <div
+              class="flex flex-wrap gap-x-6 gap-y-2 font-display text-lg md:text-xl text-paper"
+            >
+              <span class="hover:text-accent transition-colors"
+                >Team Leadership</span
+              >
+              <span class="text-white/20">/</span>
+              <span class="hover:text-accent transition-colors"
+                >Crisis Resolution</span
+              >
+              <span class="text-white/20">/</span>
+              <span class="hover:text-accent transition-colors"
+                >Event Logistics</span
+              >
+              <span class="text-white/20">/</span>
+              <span class="hover:text-accent transition-colors"
+                >Public Speaking</span
+              >
+            </div>
           </div>
         </div>
       </div>
@@ -92,5 +144,15 @@
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
 
     <script src="js/script.js"></script>
+
+    <script>
+      gsap.from("main > div", {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out",
+      });
+    </script>
   </body>
 </html>
