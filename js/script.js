@@ -100,12 +100,13 @@ if (loaderText) {
             if (shutter) shutter.style.display = "none";
           },
         })
-        .from(
+        // 👇👇👇 INI BAGIAN YANG DIPERBAIKI (BACK TO 'TO') 👇👇👇
+        .to(
           ".reveal-hero",
           {
-            y: 150,
-            opacity: 0,
-            stagger: 0.15,
+            y: 0,
+            opacity: 1,
+            stagger: 0.1,
             duration: 1.5,
             ease: "power4.out",
           },
