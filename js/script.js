@@ -29,10 +29,10 @@ if (!isMobile) {
       const y = e.clientY - rect.top - rect.height / 2;
 
       gsap.to(magnet, {
-        x: x * 0.5,
-        y: y * 0.5,
-        duration: 0.6,
-        ease: "power3.out",
+        x: x * 0.2,
+        y: y * 0.2,
+        duration: 0.4,
+        ease: "power2.out",
       });
     });
 
@@ -40,8 +40,8 @@ if (!isMobile) {
       gsap.to(magnet, {
         x: 0,
         y: 0,
-        duration: 1,
-        ease: "elastic.out(1, 0.3)",
+        duration: 0.4,
+        ease: "power2.out",
       });
     });
   });
@@ -100,7 +100,6 @@ if (loaderText) {
             if (shutter) shutter.style.display = "none";
           },
         })
-        // 👇👇👇 INI BAGIAN YANG DIPERBAIKI (BACK TO 'TO') 👇👇👇
         .to(
           ".reveal-hero",
           {
