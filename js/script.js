@@ -13,15 +13,31 @@ if (cursor) {
     });
   });
 
-  const hoverTargets = document.querySelectorAll(".hoverable, a, button");
+  const hoverTargets = document.querySelectorAll("a, button, .hoverable");
   hoverTargets.forEach((el) => {
     el.addEventListener("mouseenter", () => cursor.classList.add("hovered"));
     el.addEventListener("mouseleave", () => cursor.classList.remove("hovered"));
   });
 }
 
+const rollingLinks = document.querySelectorAll(".hoverable");
+rollingLinks.forEach((link) => {
+  if (!link.querySelector(".roll-wrapper")) {
+    const text = link.innerText;
+    link.innerHTML = "";
+    link.classList.add("roll-link");
+
+    const wrapper = document.createElement("span");
+    wrapper.classList.add("roll-wrapper");
+    wrapper.setAttribute("data-label", text);
+    wrapper.innerText = text;
+
+    link.appendChild(wrapper);
+  }
+});
+
 if (!isMobile) {
-  const magnets = document.querySelectorAll(".hoverable");
+  const magnets = document.querySelectorAll(".magnetic-wrap");
   magnets.forEach((magnet) => {
     magnet.addEventListener("mousemove", (e) => {
       const rect = magnet.getBoundingClientRect();
@@ -29,9 +45,9 @@ if (!isMobile) {
       const y = e.clientY - rect.top - rect.height / 2;
 
       gsap.to(magnet, {
-        x: x * 0.2,
-        y: y * 0.2,
-        duration: 0.4,
+        x: x * 0.3,
+        y: y * 0.3,
+        duration: 0.5,
         ease: "power2.out",
       });
     });
@@ -40,7 +56,7 @@ if (!isMobile) {
       gsap.to(magnet, {
         x: 0,
         y: 0,
-        duration: 0.4,
+        duration: 0.5,
         ease: "power2.out",
       });
     });
