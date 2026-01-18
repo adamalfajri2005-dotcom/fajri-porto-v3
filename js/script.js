@@ -1,20 +1,118 @@
 gsap.registerPlugin(ScrollTrigger);
 
+const isMobile = window.matchMedia("(max-width: 768px)").matches;
 const cursor = document.getElementById("cursor");
+
 if (cursor) {
   document.addEventListener("mousemove", (e) => {
     gsap.to(cursor, {
       x: e.clientX,
       y: e.clientY,
       duration: 0.1,
+      ease: "power2.out",
     });
   });
 
-  const hoverTargets = document.querySelectorAll(".hoverable, a");
+  const hoverTargets = document.querySelectorAll(".hoverable, a, button");
   hoverTargets.forEach((el) => {
     el.addEventListener("mouseenter", () => cursor.classList.add("hovered"));
     el.addEventListener("mouseleave", () => cursor.classList.remove("hovered"));
   });
+}
+
+if (!isMobile) {
+  const magnets = document.querySelectorAll(".hoverable");
+  magnets.forEach((magnet) => {
+    magnet.addEventListener("mousemove", (e) => {
+      const rect = magnet.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+
+      gsap.to(magnet, {
+        x: x * 0.5,
+        y: y * 0.5,
+        duration: 0.6,
+        ease: "power3.out",
+      });
+    });
+
+    magnet.addEventListener("mouseleave", () => {
+      gsap.to(magnet, {
+        x: 0,
+        y: 0,
+        duration: 1,
+        ease: "elastic.out(1, 0.3)",
+      });
+    });
+  });
+}
+
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  smoothWheel: true,
+});
+
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
+const smoothWrapper = document.getElementById("smooth-wrapper");
+if (smoothWrapper) {
+  let skew = 0;
+  lenis.on("scroll", (e) => {
+    skew = e.velocity * 0.1;
+  });
+
+  gsap.ticker.add(() => {
+    gsap.to("#smooth-content", {
+      skewY: skew,
+      duration: 0.8,
+      ease: "power3.out",
+    });
+  });
+}
+
+const loaderText = document.getElementById("loader-text");
+if (loaderText) {
+  let count = 0;
+  document.body.style.overflow = "hidden";
+
+  const interval = setInterval(() => {
+    count++;
+    loaderText.innerText = count + "%";
+    if (count === 100) {
+      clearInterval(interval);
+      document.body.style.overflow = "";
+
+      const tl = gsap.timeline();
+
+      tl.to(loaderText, { opacity: 0, duration: 0.5 })
+        .to(".blind", {
+          scaleY: 0,
+          stagger: 0.1,
+          duration: 1.2,
+          ease: "power4.inOut",
+          onComplete: () => {
+            const shutter = document.getElementById("shutter");
+            if (shutter) shutter.style.display = "none";
+          },
+        })
+        .from(
+          ".reveal-hero",
+          {
+            y: 150,
+            opacity: 0,
+            stagger: 0.15,
+            duration: 1.5,
+            ease: "power4.out",
+          },
+          "-=0.5",
+        );
+    }
+  }, 20);
 }
 
 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -38,62 +136,6 @@ if (scrambleElements.length > 0) {
         iteration += 1 / 3;
       }, 30);
     };
-  });
-}
-
-const loaderText = document.getElementById("loader-text");
-if (loaderText) {
-  let count = 0;
-  const interval = setInterval(() => {
-    count++;
-    loaderText.innerText = count + "%";
-    if (count === 100) {
-      clearInterval(interval);
-      gsap.to(loaderText, { opacity: 0, duration: 0.5 });
-      gsap.to(".blind", {
-        scaleY: 0,
-        stagger: 0.1,
-        duration: 1.2,
-        ease: "power4.inOut",
-        onComplete: () => {
-          const shutter = document.getElementById("shutter");
-          if (shutter) shutter.style.display = "none";
-        },
-      });
-      gsap.to(".reveal-hero", {
-        y: 0,
-        opacity: 1,
-        stagger: 0.1,
-        duration: 1.5,
-        delay: 0.8,
-        ease: "power4.out",
-      });
-    }
-  }, 15);
-}
-
-const lenis = new Lenis({
-  duration: 1.2,
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-});
-function raf(time) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
-}
-requestAnimationFrame(raf);
-
-const smoothWrapper = document.getElementById("smooth-wrapper");
-if (smoothWrapper) {
-  let skew = 0;
-  lenis.on("scroll", (e) => {
-    skew = e.velocity * 0.1;
-  });
-  gsap.ticker.add(() => {
-    gsap.to("#smooth-content", {
-      skewY: skew,
-      duration: 0.8,
-      ease: "power3.out",
-    });
   });
 }
 
@@ -142,7 +184,7 @@ if (cards.length > 0) {
     });
     if (innerImg) {
       gsap.to(innerImg, {
-        y: "-15%",
+        y: "-20%",
         ease: "none",
         scrollTrigger: {
           trigger: card,
@@ -157,17 +199,13 @@ if (cards.length > 0) {
 
 const revealImg = document.getElementById("reveal-img");
 const expRows = document.querySelectorAll(".exp-row");
-
-if (
-  revealImg &&
-  expRows.length > 0 &&
-  window.matchMedia("(min-width: 768px)").matches
-) {
+if (revealImg && expRows.length > 0 && !isMobile) {
   document.addEventListener("mousemove", (e) => {
     gsap.to(revealImg, {
       x: e.clientX + 30,
       y: e.clientY - 150,
-      duration: 0.5,
+      rotate: e.movementX * 0.5,
+      duration: 0.6,
       ease: "power3.out",
     });
   });
