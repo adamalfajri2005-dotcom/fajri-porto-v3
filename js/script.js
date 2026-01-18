@@ -1,8 +1,5 @@
-/* js/script.js - Updated for V3 */
-
 gsap.registerPlugin(ScrollTrigger);
 
-// --- 1. CURSOR CUSTOM (TETAP DIPAKE) ---
 const cursor = document.getElementById("cursor");
 if (cursor) {
   document.addEventListener("mousemove", (e) => {
@@ -13,22 +10,13 @@ if (cursor) {
     });
   });
 
-  // Nambahin logic biar tombol baru (.hoverable) bisa trigger cursor
-  const updateHoverTargets = () => {
-    const hoverTargets = document.querySelectorAll(
-      ".hoverable, a, .btn, .card__link",
-    );
-    hoverTargets.forEach((el) => {
-      el.addEventListener("mouseenter", () => cursor.classList.add("hovered"));
-      el.addEventListener("mouseleave", () =>
-        cursor.classList.remove("hovered"),
-      );
-    });
-  };
-  updateHoverTargets();
+  const hoverTargets = document.querySelectorAll(".hoverable, a");
+  hoverTargets.forEach((el) => {
+    el.addEventListener("mouseenter", () => cursor.classList.add("hovered"));
+    el.addEventListener("mouseleave", () => cursor.classList.remove("hovered"));
+  });
 }
 
-// --- 2. SCRAMBLE TEXT EFFECT (TETAP DIPAKE) ---
 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const scrambleElements = document.querySelectorAll(".scramble-hover");
 if (scrambleElements.length > 0) {
@@ -53,22 +41,15 @@ if (scrambleElements.length > 0) {
   });
 }
 
-// --- 3. LOADER / PRELOADER (DIMODIFIKASI) ---
 const loaderText = document.getElementById("loader-text");
 if (loaderText) {
   let count = 0;
   const interval = setInterval(() => {
     count++;
     loaderText.innerText = count + "%";
-
-    // Kalau sudah 100%
     if (count === 100) {
       clearInterval(interval);
-
-      // Ilangin teks angka
       gsap.to(loaderText, { opacity: 0, duration: 0.5 });
-
-      // Animasi tirai (shutter) kebuka
       gsap.to(".blind", {
         scaleY: 0,
         stagger: 0.1,
@@ -77,16 +58,20 @@ if (loaderText) {
         onComplete: () => {
           const shutter = document.getElementById("shutter");
           if (shutter) shutter.style.display = "none";
-
-          // --- INI BARU: Panggil animasi hero setelah loading kelar ---
-          initReveal();
         },
       });
+      gsap.to(".reveal-hero", {
+        y: 0,
+        opacity: 1,
+        stagger: 0.1,
+        duration: 1.5,
+        delay: 0.8,
+        ease: "power4.out",
+      });
     }
-  }, 15); // Kecepatan loading
+  }, 15);
 }
 
-// --- 4. SMOOTH SCROLL (LENIS) (TETAP DIPAKE) ---
 const lenis = new Lenis({
   duration: 1.2,
   easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -112,7 +97,6 @@ if (smoothWrapper) {
   });
 }
 
-// --- 5. MENU OVERLAY (TETAP DIPAKE) ---
 const menuOverlay = document.getElementById("menu-overlay");
 if (menuOverlay) {
   let menuOpen = false;
@@ -138,8 +122,39 @@ if (menuOverlay) {
   };
 }
 
-// --- 6. HOVER IMAGE REVEAL (TETAP DIPAKE BUAT LIST EXPERIENCE) ---
-// (Hanya jalan di desktop > 768px)
+let cards = gsap.utils.toArray(".card-item");
+if (cards.length > 0) {
+  cards.forEach((card, i) => {
+    const innerImg = card.querySelector(".card-image");
+    gsap.to(card, {
+      scale: 0.9,
+      opacity: 0.3,
+      filter: "blur(10px)",
+      ease: "none",
+      scrollTrigger: {
+        trigger: card,
+        start: "top 15%",
+        endTrigger: cards[cards.length - 1],
+        end: "top 15%",
+        scrub: 1.5,
+        toggleActions: "restart none none reverse",
+      },
+    });
+    if (innerImg) {
+      gsap.to(innerImg, {
+        y: "-15%",
+        ease: "none",
+        scrollTrigger: {
+          trigger: card,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1.5,
+        },
+      });
+    }
+  });
+}
+
 const revealImg = document.getElementById("reveal-img");
 const expRows = document.querySelectorAll(".exp-row");
 
@@ -173,43 +188,4 @@ if (
       gsap.to(revealImg, { opacity: 0, scale: 0.8, duration: 0.3 });
     });
   });
-}
-
-// --- 7. NEW REVEAL SYSTEM (INI BARU BRO) ---
-// Fungsinya buat animasiin elemen yang punya atribut 'data-reveal'
-const initReveal = () => {
-  if (!("IntersectionObserver" in window)) return;
-
-  const options = {
-    threshold: 0.15,
-    rootMargin: "0px 0px -50px 0px",
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const delay = entry.target.dataset.reveal * 100 || 0; // Baca delay dari data-reveal="1" dst
-
-        setTimeout(() => {
-          entry.target.classList.add("is-visible");
-        }, delay);
-
-        observer.unobserve(entry.target);
-      }
-    });
-  }, options);
-
-  // Targetin semua elemen Hero & Project baru
-  document
-    .querySelectorAll(
-      ".hero__title, .hero__subtitle, .hero__actions, .hero__visual, .project-item",
-    )
-    .forEach((el) => {
-      observer.observe(el);
-    });
-};
-
-// Panggil initReveal kalau gak ada preloader (fallback)
-if (!loaderText) {
-  initReveal();
 }
