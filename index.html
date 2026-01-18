@@ -3,32 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ADAM ALFAJRI — DIRECTOR</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=clash-display@400,500,600,700&display=swap"
-      rel="stylesheet"
+    <title>Adam Alfajri | Informatics Student & Frontend Developer</title>
+    <meta
+      name="description"
+      content="Portfolio of Adam Alfajri, an Informatics Engineering student at UIN Jakarta specializing in brutalist web design and management."
+    />
+    <meta name="author" content="Adam Alfajri" />
+
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://adamalfajri2005-dotcom.github.io/fajri-porto-v3/"
+    />
+    <meta property="og:title" content="Adam Alfajri | Portfolio" />
+    <meta
+      property="og:description"
+      content="Informatics student & Frontend Developer. Explore my projects and designs."
+    />
+    <meta
+      property="og:image"
+      content="https://adamalfajri2005-dotcom.github.io/fajri-porto-v3/assets/img/og-main-1200x630.jpg"
     />
 
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ["Satoshi", "sans-serif"],
-              display: ["Clash Display", "sans-serif"],
-            },
-            colors: {
-              void: "#050505",
-              paper: "#E1E1E1",
-              mist: "#666666",
-              accent: "#FF3300",
-            },
-          },
-        },
-      };
-    </script>
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="Adam Alfajri | Portfolio" />
+    <meta
+      property="twitter:description"
+      content="Informatics student & Frontend Developer. See my works."
+    />
+    <meta
+      property="twitter:image"
+      content="https://adamalfajri2005-dotcom.github.io/fajri-porto-v3/assets/img/og-main-1200x630.jpg"
+    />
 
     <link rel="stylesheet" href="css/style.css" />
   </head>
@@ -94,36 +101,29 @@
 
     <div id="smooth-wrapper">
       <div id="smooth-content">
-        <section class="h-screen flex flex-col justify-end px-8 pb-16 relative">
-          <div
-            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-accent rounded-full animate-pulse"
-          ></div>
-          <div
-            class="w-full border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-start md:items-end"
-          >
-            <div>
-              <h2
-                class="font-mono text-xs text-mist mb-8 reveal-hero opacity-0"
-              >
-                (001) — PORTFOLIO
-              </h2>
-              <h1
-                class="font-display text-[14vw] leading-[0.8] font-bold reveal-hero opacity-0"
-              >
-                ADAM <br />
-                ALFAJRI
-              </h1>
-            </div>
-            <div class="mb-4 md:mb-0 reveal-hero opacity-0">
-              <p
-                class="font-sans text-sm md:text-xl max-w-sm text-mist leading-relaxed text-right"
-              >
-                Engineering logic meets <br />
-                brutalist aesthetics.
+        <header class="hero" role="banner">
+          <div class="hero__container">
+            <div class="hero__content">
+              <h1 class="hero__title" data-reveal="1">ADAM<br />ALFAJRI.</h1>
+              <p class="hero__subtitle" data-reveal="2">
+                Informatics Engineering Student &<br />
+                <span class="text-accent">Frontend Minimalist.</span>
               </p>
+              <div class="hero__actions" data-reveal="3">
+                <a href="#projects" class="btn btn--primary hoverable"
+                  >View Works</a
+                >
+                <a href="#contact" class="btn btn--outline hoverable"
+                  >Contact Me</a
+                >
+              </div>
+            </div>
+
+            <div class="hero__visual" data-reveal="4">
+              <div class="visual-placeholder" aria-hidden="true"></div>
             </div>
           </div>
-        </section>
+        </header>
 
         <section id="about" class="py-32 px-8 border-b border-white/5 bg-void">
           <div class="grid grid-cols-1 md:grid-cols-12 gap-16">
@@ -173,109 +173,97 @@
           </div>
         </section>
 
-        <section id="work" class="py-32 bg-void relative z-10">
-          <div class="px-8 mb-24">
-            <span class="text-xs font-mono text-accent block mb-4"
-              >/// SELECTED WORKS</span
-            >
-            <h2 class="font-display text-7xl md:text-9xl">
-              FEATURED <br />
-              CASES
-            </h2>
-          </div>
+        <section id="projects" class="projects-section">
+          <h2 class="section-title">Selected Works</h2>
 
-          <div class="px-4 md:px-12 cards-container">
-            <div
-              class="card-item bg-[#0a0a0a] border border-white/10 rounded-none overflow-hidden group"
-            >
-              <a
-                href="https://adam-numerical-solver.streamlit.app/"
-                target="_blank"
-                class="block h-full w-full relative hoverable cursor-none"
-              >
-                <div class="img-reveal w-full h-full">
+          <ul class="project-grid">
+            <li class="project-item" data-reveal="0">
+              <article class="card">
+                <div class="card__media">
                   <img
                     src="assets/p1.jpg"
-                    class="card-image grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-100 transition duration-700"
-                    alt="P1"
+                    class="card__img"
+                    alt="Numerical Solver"
+                    loading="lazy"
                   />
                 </div>
-                <div class="absolute bottom-8 left-8 z-20">
-                  <h3
-                    class="font-display text-5xl md:text-8xl mb-2 text-white mix-blend-difference"
-                  >
-                    Numerical
-                  </h3>
-                  <div class="flex gap-2">
-                    <span
-                      class="font-mono text-xs border border-white/20 px-3 py-1 bg-black/50 text-white"
-                      >PYTHON</span
-                    >
+                <div class="card__content">
+                  <div class="card__tags">
+                    <span class="tag">PYTHON</span>
+                    <span class="tag">AUTOMATION</span>
                   </div>
+                  <h3 class="card__title">
+                    <a
+                      href="https://adam-numerical-solver.streamlit.app/"
+                      class="card__link hoverable"
+                      target="_blank"
+                      >Numerical Solver</a
+                    >
+                  </h3>
+                  <p class="card__desc">
+                    Developing high-precision numerical solvers and automation
+                    scripts using Python.
+                  </p>
                 </div>
-              </a>
-            </div>
+              </article>
+            </li>
 
-            <div
-              class="card-item bg-[#0a0a0a] border border-white/10 rounded-none overflow-hidden group"
-            >
-              <a
-                href="project-bakery.html"
-                class="block h-full w-full relative hoverable cursor-none"
-              >
-                <div class="img-reveal w-full h-full">
+            <li class="project-item" data-reveal="1">
+              <article class="card">
+                <div class="card__media">
                   <img
                     src="assets/p2.jpg"
-                    class="card-image grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-100 transition duration-700"
-                    alt="P2"
+                    class="card__img"
+                    alt="Bakery DB"
+                    loading="lazy"
                   />
                 </div>
-                <div class="absolute bottom-8 left-8 z-20">
-                  <h3
-                    class="font-display text-5xl md:text-8xl mb-2 text-white mix-blend-difference"
-                  >
-                    Bakery DB
-                  </h3>
-                  <div class="flex gap-2">
-                    <span
-                      class="font-mono text-xs border border-white/20 px-3 py-1 bg-black/50 text-white"
-                      >ORACLE</span
-                    >
+                <div class="card__content">
+                  <div class="card__tags">
+                    <span class="tag">ORACLE</span>
+                    <span class="tag">DATABASE</span>
                   </div>
+                  <h3 class="card__title">
+                    <a href="project-bakery.html" class="card__link hoverable"
+                      >Bakery DB System</a
+                    >
+                  </h3>
+                  <p class="card__desc">
+                    Designing scalable SQL databases architecture. Structure is
+                    the foundation of everything.
+                  </p>
                 </div>
-              </a>
-            </div>
+              </article>
+            </li>
 
-            <div
-              class="card-item bg-[#0a0a0a] border border-white/10 rounded-none overflow-hidden group"
-            >
-              <a
-                href="project-mabing.html"
-                class="block h-full w-full relative hoverable cursor-none"
-              >
-                <div class="img-reveal w-full h-full">
+            <li class="project-item" data-reveal="2">
+              <article class="card">
+                <div class="card__media">
                   <img
                     src="assets/p3.jpg"
-                    class="card-image grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-100 transition duration-700"
-                    alt="P3"
+                    class="card__img"
+                    alt="Mabing Crisis"
+                    loading="lazy"
                   />
                 </div>
-                <div class="absolute bottom-8 left-8 z-20">
-                  <h3
-                    class="font-display text-5xl md:text-8xl mb-2 text-white mix-blend-difference"
-                  >
-                    Mabing Crisis
-                  </h3>
-                  <div class="flex gap-2">
-                    <span
-                      class="font-mono text-xs border border-white/20 px-3 py-1 bg-black/50 text-white"
-                      >LEADERSHIP</span
-                    >
+                <div class="card__content">
+                  <div class="card__tags">
+                    <span class="tag">LEADERSHIP</span>
+                    <span class="tag">MANAGEMENT</span>
                   </div>
+                  <h3 class="card__title">
+                    <a href="project-mabing.html" class="card__link hoverable"
+                      >Mabing Crisis</a
+                    >
+                  </h3>
+                  <p class="card__desc">
+                    Leading 100+ people organizations (HIMTI) and managing
+                    operational logistics.
+                  </p>
                 </div>
-              </a>
-            </div>
-          </div>
+              </article>
+            </li>
+          </ul>
         </section>
 
         <section
