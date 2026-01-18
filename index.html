@@ -59,6 +59,10 @@
               mist: "#666666",
               accent: "#FF3300",
             },
+            animation: {
+              "spin-slow": "spin 8s linear infinite",
+              "fade-in": "fadeIn 1s ease-out forwards",
+            },
           },
         },
       };
@@ -69,6 +73,7 @@
   <body class="antialiased">
     <div id="cursor"></div>
     <div class="noise"></div>
+    <div class="grid-bg"></div>
     <img src="assets/org-1.jpg" class="hover-reveal-img" id="reveal-img" />
     <div class="grid-bg"></div>
 
@@ -132,6 +137,7 @@
           <div
             class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-accent rounded-full animate-pulse"
           ></div>
+
           <div
             class="w-full border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-start md:items-end"
           >
@@ -155,6 +161,29 @@
                 Informatics Engineering Undergraduate.<br />
                 Based in Jakarta, Indonesia.
               </p>
+            </div>
+          </div>
+
+          <div
+            class="absolute bottom-12 right-12 flex items-center gap-4 hidden md:flex reveal-hero opacity-0"
+          >
+            <span class="font-mono text-[10px] text-mist tracking-widest"
+              >SCROLL TO EXPLORE</span
+            >
+            <div
+              class="w-12 h-12 border border-white/20 rounded-full flex items-center justify-center animate-spin"
+            >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                class="text-accent"
+              >
+                <path d="M12 5v14M19 12l-7 7-7-7" />
+              </svg>
             </div>
           </div>
         </section>
