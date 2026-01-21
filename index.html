@@ -3,109 +3,76 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ADAM ALFAJRI — DIRECTOR</title>
+    <title>ADAM ALFAJRI — VISUAL THINKER</title>
     <meta
       name="description"
-      content="Portfolio of Adam Alfajri — Informatics Engineering Student & Creative Developer specializing in Python Automation and Database Architecture."
-    />
-    <meta
-      name="keywords"
-      content="Adam Alfajri, Web Developer, Python, SQL, UIN Jakarta, HIMTI, Portfolio"
-    />
-    <meta name="author" content="Adam Alfajri" />
-
-    <meta property="og:type" content="website" />
-    <meta
-      property="og:url"
-      content="https://adamalfajri2005-dotcom.github.io/fajri-porto-v3/"
-    />
-    <meta property="og:title" content="ADAM ALFAJRI — ENGINEER & LEADER" />
-    <meta
-      property="og:description"
-      content="Informatics Student & Project Manager. Crafting logic, data, and leadership."
-    />
-    <meta
-      property="og:image"
-      content="https://adamalfajri2005-dotcom.github.io/fajri-porto-v3/assets/og-image.jpg"
+      content="Portfolio of Adam Alfajri — Informatics Student & Visual Thinker. Exploring the intersection of Logic, Design, and Community."
     />
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="ADAM ALFAJRI — ENGINEER & LEADER" />
-    <meta
-      name="twitter:description"
-      content="Informatics Student & Project Manager. Crafting logic, data, and leadership."
-    />
-    <meta
-      name="twitter:image"
-      content="https://adamalfajri2005-dotcom.github.io/fajri-porto-v3/assets/og-image.jpg"
-    />
-    <script src="https://cdn.tailwindcss.com"></script>
     <link
       href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=clash-display@400,500,600,700&display=swap"
       rel="stylesheet"
     />
 
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ["Satoshi", "sans-serif"],
-              display: ["Clash Display", "sans-serif"],
-            },
-            colors: {
-              void: "#050505",
-              paper: "#E1E1E1",
-              mist: "#666666",
-              accent: "#FF3300",
-            },
-            animation: {
-              "spin-slow": "spin 8s linear infinite",
-              "fade-in": "fadeIn 1s ease-out forwards",
-            },
-          },
-        },
-      };
-    </script>
+    <link rel="stylesheet" href="style.css" />
 
-    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
   </head>
-  <body class="antialiased">
+  <body>
     <div id="cursor"></div>
-    <div class="noise"></div>
-    <div class="grid-bg"></div>
-    <img src="assets/org-1.jpg" class="hover-reveal-img" id="reveal-img" />
-    <div class="grid-bg"></div>
+
+    <div class="bg-noise"></div>
+    <div class="bg-grid"></div>
+
+    <img
+      src=""
+      class="hover-reveal-img"
+      id="reveal-img"
+      alt="Experience Preview"
+    />
 
     <div class="shutter" id="shutter">
       <div class="blind"></div>
       <div class="blind"></div>
       <div class="blind"></div>
       <div class="blind"></div>
-      <div class="absolute inset-0 flex justify-center items-center z-10">
-        <div class="font-display text-void text-6xl" id="loader-text">0%</div>
+      <div class="loader-content">
+        <div class="loader-text" id="loader-text">0%</div>
       </div>
     </div>
 
+    <nav class="navbar">
+      <div class="logo hoverable">
+        <span class="scramble-hover" data-value="ADAM.">ADAM.</span>
+      </div>
+      <div class="menu-btn hoverable" onclick="toggleMenu()">
+        <span class="scramble-hover" id="menu-btn-text" data-value="MENU"
+          >MENU</span
+        >
+      </div>
+    </nav>
+
     <div id="menu-overlay">
-      <div class="flex flex-col gap-6">
+      <div class="menu-links">
         <a
           href="#about"
-          class="text-[8vw] font-display leading-none text-white hover:text-accent transition duration-300 scramble-hover hoverable"
+          class="menu-link hoverable scramble-hover"
           onclick="toggleMenu()"
           data-value="PROFILE"
           >PROFILE</a
         >
         <a
           href="#work"
-          class="text-[8vw] font-display leading-none text-white hover:text-accent transition duration-300 scramble-hover hoverable"
+          class="menu-link hoverable scramble-hover"
           onclick="toggleMenu()"
           data-value="SELECTED WORKS"
           >SELECTED WORKS</a
         >
         <a
-          href="mailto:adamalfajri2005@gmail.com"
-          class="text-[8vw] font-display leading-none text-white hover:text-accent transition duration-300 scramble-hover hoverable"
+          href="#contact"
+          class="menu-link hoverable scramble-hover"
           onclick="toggleMenu()"
           data-value="CONTACT"
           >CONTACT</a
@@ -113,410 +80,212 @@
       </div>
     </div>
 
-    <nav
-      class="fixed top-0 w-full px-8 py-8 flex justify-between items-center z-[100] mix-blend-difference text-white"
-    >
-      <div
-        class="font-display font-bold text-xl tracking-widest hoverable group cursor-pointer"
-      >
-        <span class="scramble-hover" data-value="ADAM.">ADAM.</span>
-      </div>
-      <div class="hoverable cursor-pointer group" onclick="toggleMenu()">
-        <span
-          class="font-mono text-xs tracking-widest scramble-hover"
-          id="menu-btn-text"
-          data-value="MENU"
-          >MENU</span
-        >
-      </div>
-    </nav>
-
     <div id="smooth-wrapper">
       <div id="smooth-content">
-        <section class="h-screen flex flex-col justify-end px-8 pb-16 relative">
-          <div
-            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-accent rounded-full animate-pulse"
-          ></div>
-
-          <div
-            class="w-full border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-start md:items-end"
-          >
-            <div>
-              <h2
-                class="font-mono text-xs text-mist mb-8 reveal-hero opacity-0"
-              >
-                (001) — PORTFOLIO
-              </h2>
-              <h1
-                class="font-display text-[14vw] leading-[0.8] font-bold reveal-hero opacity-0"
-              >
-                ADAM <br />
-                ALFAJRI
+        <section class="hero-section">
+          <div class="hero-content">
+            <div class="hero-text-wrapper">
+              <h2 class="hero-subtitle reveal-hero">(001) — PORTFOLIO</h2>
+              <h1 class="hero-title reveal-hero">
+                VISUAL <br />
+                THINKER.
               </h1>
             </div>
-            <div class="mb-4 md:mb-0 reveal-hero opacity-0">
-              <p
-                class="font-sans text-sm md:text-xl max-w-sm text-mist leading-relaxed text-right"
-              >
-                Informatics Engineering Undergraduate.<br />
-                Based in Jakarta, Indonesia.
+            <div class="hero-desc reveal-hero">
+              <p>
+                Informatics Student @ UIN Jakarta.<br />
+                Turning logic into visual experiences.
               </p>
             </div>
           </div>
 
-          <div
-            class="absolute bottom-12 left-8 md:left-12 flex items-center gap-4 hidden md:flex reveal-hero opacity-0"
-          >
-            <span class="font-mono text-[10px] text-mist tracking-widest"
-              >SCROLL TO EXPLORE</span
-            >
-            <div
-              class="w-12 h-12 border border-white/20 rounded-full flex items-center justify-center animate-spin"
-            >
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                class="text-accent"
-              >
-                <path d="M12 5v14M19 12l-7 7-7-7" />
-              </svg>
-            </div>
+          <div class="scroll-indicator reveal-hero">
+            <span>SCROLL TO EXPLORE</span>
+            <div class="spinner"></div>
           </div>
         </section>
 
-        <section id="about" class="py-32 px-8 border-b border-white/5 bg-void">
-          <div class="grid grid-cols-1 md:grid-cols-12 gap-16">
-            <div class="md:col-span-4 sticky top-24 h-fit">
-              <span class="text-xs font-mono text-accent block mb-4"
-                >/// CAPABILITIES</span
-              >
-              <h2 class="font-display text-5xl">
-                ENGINEER <br />
-                & LEADER.
+        <section id="about" class="about-section">
+          <div class="container grid-layout">
+            <div class="about-header sticky-col">
+              <span class="section-label">/// CAPABILITIES</span>
+              <h2 class="section-title">
+                LOGIC MEETS <br />
+                CREATIVITY.
               </h2>
             </div>
-            <div class="md:col-span-8 grid gap-16">
-              <div class="hoverable group border-t border-white/10 pt-8">
-                <h3
-                  class="font-display text-4xl mb-4 group-hover:text-accent transition"
-                >
-                  01. Python Automation
-                </h3>
-                <p
-                  class="text-mist text-sm md:text-base leading-relaxed max-w-2xl"
-                >
-                  Developing high precision Python scripts for
-                  <strong>Numerical Methods</strong> and linear algebra solvers.
-                  I transform complex mathematical formulas into efficient
-                  automation code, ensuring calculation accuracy for academic
-                  research and case studies.
+
+            <div class="about-list">
+              <div class="capability-item hoverable">
+                <h3>01. Computational Logic</h3>
+                <p>
+                  I love solving problems. Using <strong>Python</strong> to
+                  visualize math concepts (Numerical Methods) and break down
+                  complex algorithms into clean steps. I speak logic so you
+                  don't have to.
                 </p>
               </div>
-              <div class="hoverable group border-t border-white/10 pt-8">
-                <h3
-                  class="font-display text-4xl mb-4 group-hover:text-accent transition"
-                >
-                  02. Database Architecture
-                </h3>
-                <p
-                  class="text-mist text-sm md:text-base leading-relaxed max-w-2xl"
-                >
-                  Architected a robust inventory management system (<strong
-                    >Bakery DB</strong
-                  >) using Oracle SQL. Designed the Entity Relationship Diagram
-                  (ERD) to handle stock tracking, sales transactions, and supply
-                  chain data with zero redundancy.
+              <div class="capability-item hoverable">
+                <h3>02. System Thinking</h3>
+                <p>
+                  Designing the flow of information. I focus on how data moves
+                  in a business (ERD & Database), ensuring the system makes
+                  sense before writing a single line of code.
                 </p>
               </div>
-              <div class="hoverable group border-t border-white/10 pt-8">
-                <h3
-                  class="font-display text-4xl mb-4 group-hover:text-accent transition"
-                >
-                  03. Organizational Leadership
-                </h3>
-                <p
-                  class="text-mist text-sm md:text-base leading-relaxed max-w-2xl"
-                >
-                  Serving as Project Manager for
-                  <strong>HIMTI UIN Jakarta</strong>, leading the mentorship
-                  program for 100+ new students. Specialized in crisis
-                  management, operational logistics, and team coordination for
-                  large scale campus events.
+              <div class="capability-item hoverable">
+                <h3>03. The Vibe (Leadership)</h3>
+                <p>
+                  Handling the chaos at <strong>HIMTI UIN Jakarta</strong>.
+                  Managing 100+ students, tight deadlines, and zero panic. I
+                  keep the team energy right and the project moving.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="work" class="py-32 bg-void relative z-10">
-          <div class="px-8 mb-24">
-            <span class="text-xs font-mono text-accent block mb-4"
-              >/// SELECTED WORKS</span
-            >
-            <h2 class="font-display text-7xl md:text-9xl">
+        <section id="work" class="work-section">
+          <div class="container">
+            <span class="section-label">/// SELECTED WORKS</span>
+            <h2 class="big-title">
               FEATURED <br />
               CASES
             </h2>
           </div>
 
-          <div class="px-4 md:px-12 cards-container">
-            <div
-              class="card-item bg-[#0a0a0a] border border-white/10 rounded-none overflow-hidden group"
-            >
+          <div class="projects-grid">
+            <div class="project-card hoverable">
               <a
                 href="https://adam-numerical-solver.streamlit.app/"
                 target="_blank"
-                class="block h-full w-full relative hoverable cursor-none"
               >
-                <div class="img-reveal w-full h-full">
+                <div class="card-img-wrapper">
                   <img
                     src="assets/p1.jpg"
-                    class="card-image grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-100 transition duration-700"
-                    alt="P1"
+                    alt="Numerical Solver"
+                    class="project-img"
                   />
                 </div>
-                <div class="absolute bottom-8 left-8 z-20">
-                  <h3
-                    class="font-display text-5xl md:text-8xl mb-2 text-white mix-blend-difference"
-                  >
-                    Numerical
-                  </h3>
-                  <div class="flex gap-2">
-                    <span
-                      class="font-mono text-xs border border-white/20 px-3 py-1 bg-black/50 text-white"
-                      >PYTHON</span
-                    >
-                  </div>
+                <div class="card-info">
+                  <h3>Math Visualization</h3>
+                  <span class="tag">PYTHON</span>
                 </div>
               </a>
             </div>
 
-            <div
-              class="card-item bg-[#0a0a0a] border border-white/10 rounded-none overflow-hidden group"
-            >
-              <a
-                href="project-bakery.html"
-                class="block h-full w-full relative hoverable cursor-none"
-              >
-                <div class="img-reveal w-full h-full">
+            <div class="project-card hoverable">
+              <a href="project-bakery.html">
+                <div class="card-img-wrapper">
                   <img
                     src="assets/p2.jpg"
-                    class="card-image grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-100 transition duration-700"
-                    alt="P2"
+                    alt="Bakery DB"
+                    class="project-img"
                   />
                 </div>
-                <div class="absolute bottom-8 left-8 z-20">
-                  <h3
-                    class="font-display text-5xl md:text-8xl mb-2 text-white mix-blend-difference"
-                  >
-                    Bakery DB
-                  </h3>
-                  <div class="flex gap-2">
-                    <span
-                      class="font-mono text-xs border border-white/20 px-3 py-1 bg-black/50 text-white"
-                      >ORACLE</span
-                    >
-                  </div>
+                <div class="card-info">
+                  <h3>Business Logic System</h3>
+                  <span class="tag">ORACLE SQL</span>
                 </div>
               </a>
             </div>
 
-            <div
-              class="card-item bg-[#0a0a0a] border border-white/10 rounded-none overflow-hidden group"
-            >
-              <a
-                href="project-mabing.html"
-                class="block h-full w-full relative hoverable cursor-none"
-              >
-                <div class="img-reveal w-full h-full">
+            <div class="project-card hoverable">
+              <a href="project-mabing.html">
+                <div class="card-img-wrapper">
                   <img
                     src="assets/p3.jpg"
-                    class="card-image grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-100 transition duration-700"
-                    alt="P3"
+                    alt="Mabing Crisis"
+                    class="project-img"
                   />
                 </div>
-                <div class="absolute bottom-8 left-8 z-20">
-                  <h3
-                    class="font-display text-5xl md:text-8xl mb-2 text-white mix-blend-difference"
-                  >
-                    Mabing Crisis
-                  </h3>
-                  <div class="flex gap-2">
-                    <span
-                      class="font-mono text-xs border border-white/20 px-3 py-1 bg-black/50 text-white"
-                      >LEADERSHIP</span
-                    >
-                  </div>
+                <div class="card-info">
+                  <h3>Crisis Management</h3>
+                  <span class="tag">LEADERSHIP</span>
                 </div>
               </a>
             </div>
           </div>
         </section>
 
-        <section
-          class="py-32 px-8 border-t border-white/5 bg-void relative z-20"
-        >
-          <div class="mb-32">
-            <div
-              class="flex items-end justify-between mb-16 border-b border-white/10 pb-8"
-            >
-              <h2 class="font-display text-4xl md:text-6xl leading-tight">
-                EXPERIENCE.
-              </h2>
-              <span
-                class="font-mono text-xs text-accent tracking-widest hidden md:block"
-                >/// HISTORY</span
-              >
+        <section class="experience-section">
+          <div class="container">
+            <div class="exp-header">
+              <h2 class="section-title">EXPERIENCE.</h2>
+              <span class="section-label">/// HISTORY</span>
             </div>
 
-            <div class="flex flex-col">
-              <div
-                class="group py-12 border-b border-white/10 flex flex-col md:flex-row md:justify-between md:items-start gap-6 hover:bg-white/5 transition-colors duration-500 px-4 -mx-4 rounded-lg cursor-none hoverable exp-row"
-                data-img="assets/org-1.jpg"
-              >
-                <div class="md:w-1/3">
-                  <h3
-                    class="font-display text-xl md:text-2xl group-hover:text-accent transition-colors group-hover:translate-x-2 duration-300"
-                  >
-                    Head of Mentoring
-                  </h3>
-                  <span class="font-mono text-xs text-mist mt-2 block"
-                    >HIMTI UIN JAKARTA</span
-                  >
+            <div class="exp-list">
+              <div class="exp-row hoverable" data-img="assets/org-1.jpg">
+                <div class="col-role">
+                  <h3>Head of Mentoring</h3>
+                  <span>HIMTI UIN JAKARTA</span>
                 </div>
-                <div class="md:w-1/2">
-                  <p
-                    class="text-mist text-sm leading-relaxed pointer-events-none"
-                  >
+                <div class="col-desc">
+                  <p>
                     Orchestrated the strategic onboarding for
-                    <strong>100+ new informatics students</strong>. Led a team
-                    of 13 mentors and designed the academic curriculum to ensure
-                    successful adaptation for the freshman class.
+                    <strong>100+ new students</strong>. Led a team of 13 mentors
+                    and designed the academic curriculum.
                   </p>
                 </div>
-                <div class="md:w-1/6 text-left md:text-right">
-                  <span
-                    class="font-mono text-xs border border-white/20 px-2 py-1 rounded-full"
-                    >2025</span
-                  >
-                </div>
+                <div class="col-year">2025</div>
               </div>
 
-              <div
-                class="group py-12 border-b border-white/10 flex flex-col md:flex-row md:justify-between md:items-start gap-6 hover:bg-white/5 transition-colors duration-500 px-4 -mx-4 rounded-lg cursor-none hoverable exp-row"
-                data-img="assets/org-2.jpg"
-              >
-                <div class="md:w-1/3">
-                  <h3
-                    class="font-display text-xl md:text-2xl group-hover:text-accent transition-colors group-hover:translate-x-2 duration-300"
-                  >
-                    Student Relations
-                  </h3>
-                  <span class="font-mono text-xs text-mist mt-2 block"
-                    >HIMTI UIN JAKARTA</span
-                  >
+              <div class="exp-row hoverable" data-img="assets/org-2.jpg">
+                <div class="col-role">
+                  <h3>Student Relations</h3>
+                  <span>HIMTI UIN JAKARTA</span>
                 </div>
-                <div class="md:w-1/2">
-                  <p
-                    class="text-mist text-sm leading-relaxed pointer-events-none"
-                  >
-                    Served in the <strong>Student Approach Unit</strong>, acting
-                    as the primary bridge between the student body and the
-                    organization. Focused on aspiration gathering, conflict
-                    resolution, and maintaining a healthy campus ecosystem.
+                <div class="col-desc">
+                  <p>
+                    Served in the Student Approach Unit. Focused on aspiration
+                    gathering, conflict resolution, and maintaining a healthy
+                    campus ecosystem.
                   </p>
                 </div>
-                <div class="md:w-1/6 text-left md:text-right">
-                  <span
-                    class="font-mono text-xs border border-white/20 px-2 py-1 rounded-full"
-                    >2025 — 2026</span
-                  >
-                </div>
+                <div class="col-year">2025 — 2026</div>
               </div>
 
-              <div
-                class="group py-12 border-b border-white/10 flex flex-col md:flex-row md:justify-between md:items-start gap-6 hover:bg-white/5 transition-colors duration-500 px-4 -mx-4 rounded-lg cursor-none hoverable exp-row"
-                data-img="assets/me.jpg"
-              >
-                <div class="md:w-1/3">
-                  <h3
-                    class="font-display text-xl md:text-2xl group-hover:text-accent transition-colors group-hover:translate-x-2 duration-300"
-                  >
-                    Independent Engineer
-                  </h3>
-                  <span class="font-mono text-xs text-mist mt-2 block"
-                    >REMOTE / FREELANCE</span
-                  >
+              <div class="exp-row hoverable" data-img="assets/me.jpg">
+                <div class="col-role">
+                  <h3>Creative Explorer</h3>
+                  <span>FREELANCE / OPEN TO WORK</span>
                 </div>
-                <div class="md:w-1/2">
-                  <p
-                    class="text-mist text-sm leading-relaxed pointer-events-none"
-                  >
-                    Delivering custom software solutions for academic and
-                    commercial clients. Specialized in high-precision
-                    <strong>Python Automation</strong> scripts and architecting
-                    scalable <strong>SQL Databases</strong> (Oracle/MySQL).
+                <div class="col-desc">
+                  <p>
+                    Currently expanding my skillset in
+                    <strong>UI/UX Design</strong> and
+                    <strong>Frontend Development</strong>. Open for freelance
+                    opportunities.
                   </p>
                 </div>
-                <div class="md:w-1/6 text-left md:text-right">
-                  <span
-                    class="font-mono text-xs border border-white/20 px-2 py-1 rounded-full"
-                    >2026 — PRESENT</span
-                  >
-                </div>
+                <div class="col-year">2026 — PRESENT</div>
               </div>
             </div>
           </div>
         </section>
 
-        <footer
-          class="h-screen flex flex-col justify-center items-center relative bg-paper text-void"
-        >
-          <p class="font-mono text-xs tracking-widest text-mist mb-8">
-            INITIATE CONTACT
-          </p>
+        <footer id="contact" class="footer-section">
+          <p class="footer-cta-label">GOT A CRAZY IDEA?</p>
           <a
             href="mailto:adamalfajri2005@gmail.com"
-            class="hoverable cursor-none"
+            class="hoverable footer-link"
           >
-            <h2
-              class="font-display text-[12vw] leading-none hover:text-accent transition duration-300 scramble-hover"
-              data-value="LET'S TALK"
-            >
-              LET'S TALK
+            <h2 class="big-cta scramble-hover" data-value="LET'S COOK">
+              LET'S COOK
             </h2>
           </a>
-          <div
-            class="absolute bottom-8 w-full px-8 flex justify-between text-[10px] tracking-widest font-mono text-mist"
-          >
+
+          <div class="footer-bottom">
             <span>ADAM ALFAJRI © 2026</span>
-            <div class="flex gap-6">
-              <a
-                href="http://www.linkedin.com/in/adam-alfajri-185b33315/"
-                target="_blank"
-                class="hover:text-black hoverable"
-                >LINKEDIN</a
-              >
-              <a
-                href="cv-adam.pdf"
-                target="_blank"
-                class="hover:text-black hoverable"
-                >RESUME</a
-              >
+            <div class="social-links">
+              <a href="#" class="hoverable">LINKEDIN</a>
+              <a href="#" class="hoverable">RESUME</a>
             </div>
           </div>
         </footer>
       </div>
     </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
-
-    <script src="js/script.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
