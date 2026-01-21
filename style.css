@@ -422,7 +422,7 @@ a {
 }
 .big-cta {
   font-family: var(--font-display);
-  font-size: 15vw;
+  font-size: 12vw;
   line-height: 0.8;
   cursor: none;
   transition: color 0.3s;
