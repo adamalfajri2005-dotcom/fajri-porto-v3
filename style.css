@@ -545,12 +545,14 @@ a {
 
   /* 7. Footer */
   .big-cta {
-    font-size: 18vw;
-  }
-  .footer-bottom {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+    font-size: 13vw; /* Turunin dari 18vw jadi 13vw biar muat */
+    white-space: nowrap; /* PAKSA SATU BARIS (Anti patah) */
     text-align: center;
+    width: 100%;
+    display: block;
+  }
+
+  .footer-section {
+    padding: 0 1rem; /* Kasih nafas dikit kiri-kanan */
   }
 }
