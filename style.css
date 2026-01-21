@@ -444,3 +444,105 @@ a {
   display: flex;
   gap: 2rem;
 }
+
+/* =========================================
+   MOBILE RESPONSIVE FIXES
+   (Tempel ini di baris paling bawah style.css)
+   ========================================= */
+
+@media (max-width: 768px) {
+  /* 1. Matiin Kursor Merah Total */
+  #cursor {
+    display: none !important;
+  }
+  body {
+    cursor: auto !important;
+  } /* Balikin kursor jari normal */
+
+  /* 2. Benerin Padding (Biar ga kegedean) */
+  .hero-section {
+    padding: 0 1.5rem 6rem 1.5rem;
+    justify-content: center;
+  }
+  .container {
+    padding: 0 1.5rem;
+  }
+  .navbar {
+    padding: 1.5rem;
+  }
+
+  /* 3. Benerin Font Size (Biar ga tumpah) */
+  .hero-title {
+    font-size: 18vw;
+    line-height: 0.9;
+  } /* Lebih gede dikit biar kebaca */
+  .big-title {
+    font-size: 15vw;
+  }
+  .section-title {
+    font-size: 2.5rem;
+  }
+  .hero-desc {
+    text-align: left;
+    margin-left: 0;
+    max-width: 100%;
+    font-size: 1rem;
+  }
+
+  /* 4. Grid Jadi 1 Kolom (Stack ke bawah) */
+  .grid-layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .sticky-col {
+    position: relative;
+    top: 0;
+    margin-bottom: 2rem;
+  }
+
+  /* 5. Experience List */
+  .exp-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .col-role {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  .col-desc {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  .col-year {
+    text-align: left;
+    width: 100%;
+  }
+
+  /* 6. Projects Card */
+  .card-img-wrapper {
+    height: 40vh;
+  } /* Kurangin tinggi gambar di HP */
+  .card-info {
+    bottom: -4rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+  .card-info h3 {
+    font-size: 2.5rem;
+  }
+  .projects-grid {
+    gap: 6rem;
+  }
+
+  /* 7. Footer */
+  .big-cta {
+    font-size: 18vw;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+  }
+}
