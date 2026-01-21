@@ -19,7 +19,6 @@ body {
   color: var(--text-color);
   font-family: var(--font-body);
   overflow-x: hidden;
-  cursor: none; /* Kursor hilang default, diganti custom JS */
 }
 
 /* Biar scrollbar ga ngerusak pemandangan */
@@ -60,27 +59,40 @@ a {
   z-index: 90;
 }
 
-/* --- 3. CUSTOM CURSOR --- */
+/* --- 3. CUSTOM CURSOR (RESPONSIVE FIX) --- */
 #cursor {
-  width: 12px;
-  height: 12px;
-  background: var(--accent-color);
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition:
-    width 0.3s,
-    height 0.3s,
-    background 0.3s;
-  mix-blend-mode: exclusion;
+  display: none; /* Default di HP: Umpetin kursor merah */
 }
-#cursor.hovered {
-  width: 80px;
-  height: 80px;
-  background: white;
-  mix-blend-mode: difference;
+
+/* Aturan Khusus Laptop/PC (Layar > 768px) */
+@media (min-width: 768px) {
+  body {
+    cursor: none; /*ilangin kursor asli panah putih */
+  }
+
+  #cursor {
+    display: block; /* Munculin kursor merah */
+    width: 12px;
+    height: 12px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition:
+      width 0.3s,
+      height 0.3s,
+      background 0.3s;
+    mix-blend-mode: exclusion;
+  }
+
+  #cursor.hovered {
+    width: 80px;
+    height: 80px;
+    background: white;
+    mix-blend-mode: difference;
+  }
 }
 
 /* --- 4. LOADER (SHUTTER) --- */
