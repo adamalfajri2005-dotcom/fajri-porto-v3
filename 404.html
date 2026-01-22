@@ -69,26 +69,39 @@
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
     <script>
       // Cek apakah di Laptop (Layar Besar)
       if (window.matchMedia("(min-width: 768px)").matches) {
         const cursor = document.getElementById("cursor");
         const hoverables = document.querySelectorAll(".hoverable");
 
-        // Set posisi awal biar bener-bener di tengah (xPercent/yPercent)
-        gsap.set(cursor, { xPercent: -50, yPercent: -50 });
+        // 1. RESET CSS BAWAAN (PENTING!)
+        // Kita apus transform dari CSS biar GSAP ga bingung
+        cursor.style.transform = "none";
 
-        // LOGIKA GERAK (Mouse Follower)
-        document.addEventListener("mousemove", (e) => {
-          gsap.to(cursor, {
-            x: e.clientX,
-            y: e.clientY,
-            duration: 0.1, // Responsif, ga terlalu delay
-            ease: "power2.out",
-          });
+        // 2. SET TITIK TENGAH (ANCHOR POINT)
+        // Ini bikin kursor bener-bener di tengah, bukan di pinggir
+        gsap.set(cursor, { xPercent: -50, yPercent: -50, opacity: 1 });
+
+        // 3. GUNAKAN "QUICK TO" (Metode Paling Cepat & Akurat)
+        const xTo = gsap.quickTo(cursor, "x", {
+          duration: 0.1,
+          ease: "power3",
+        });
+        const yTo = gsap.quickTo(cursor, "y", {
+          duration: 0.1,
+          ease: "power3",
         });
 
-        // LOGIKA HOVER (Membesar pas kena tombol/teks)
+        // LOGIKA GERAK
+        window.addEventListener("mousemove", (e) => {
+          xTo(e.clientX);
+          yTo(e.clientY);
+        });
+
+        // LOGIKA HOVER (Membesar)
         hoverables.forEach((el) => {
           el.addEventListener("mouseenter", () =>
             cursor.classList.add("hovered"),
