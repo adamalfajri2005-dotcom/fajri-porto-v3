@@ -460,60 +460,124 @@ a {
 }
 
 /* =========================================
-   REVISI: COMPACT FEATURED CASES
-   (Paste di paling bawah style.css)
+   AWWWARDS STYLE: EDITORIAL ZIG-ZAG
    ========================================= */
 
-/* 1. Kecilin Judul "FEATURED CASES" */
-#work .big-title {
-  font-size: clamp(2.5rem, 6vw, 4.5rem); /* Jauh lebih kalem */
-  line-height: 1;
-  margin-bottom: 3rem;
+#work .container {
+  padding: 0 4rem; /* Kasih nafas kiri kanan lebih lega */
 }
 
-/* 2. Bikin Grid 2 Kolom (Kiri-Kanan) khusus di Laptop */
-@media (min-width: 768px) {
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Ini kuncinya: 2 Kolom */
-    gap: 2.5rem; /* Jarak antar kartu */
-    padding: 0; /* Reset padding biar rapi */
-  }
+.projects-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10rem; /* Jarak antar project jauh biar eksklusif */
+  margin-top: 4rem;
 }
 
-/* 3. Atur Tinggi Gambar Project biar ga Raksasa */
-.card-img-wrapper {
-  height: 300px; /* Kita kunci tingginya segini (Landscape) */
+.project-card {
+  display: flex;
+  align-items: center; /* Vertikal center */
+  gap: 4rem; /* Jarak antara Gambar dan Teks */
   width: 100%;
 }
 
-/* 4. Gambar tetep cover (ga gepeng) */
+/* GAMBARNYA */
+.card-img-wrapper {
+  width: 55%; /* Gambar ambil 55% lebar layar */
+  height: 65vh; /* Tinggi proporsional */
+  overflow: hidden;
+  position: relative;
+  /* Efek Reveal Tirai (Akan dianimasiin JS nanti) */
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  transition: transform 0.5s ease;
+}
+
 .project-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transform: scale(1.2); /* Zoom in dikit biar bisa parallax */
+  transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-/* 5. Typography Judul Project (Misal: Math Visualization) */
+/* TEKSNYA */
 .card-info {
-  position: relative; /* Balikin ke relative biar nempel di bawah gambar */
-  bottom: 0;
-  margin-top: 1rem;
+  width: 45%;
+  position: relative; /* Balikin posisi normal (bukan absolute) */
+  bottom: auto;
+  left: auto;
+  display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  align-items: flex-start;
+  z-index: 2;
 }
 
 .card-info h3 {
-  font-size: 1.8rem; /* Ukuran pas, ga teriak */
-  mix-blend-mode: normal; /* Balikin blend mode normal */
+  font-family: var(--font-display);
+  font-size: 4rem; /* Judul Gede */
+  line-height: 0.9;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+  /* Sedikit geser teks biar numpuk ke gambar (Artistic Touch) */
+  margin-left: -3rem;
+  mix-blend-mode: exclusion; /* Biar warnanya kontras kalau kena gambar */
 }
 
-/* 6. Tag Project (Misal: PYTHON) */
-.card-info span {
+.card-info p {
+  font-size: 1rem;
+  color: var(--mist-color);
+  max-width: 300px;
+  margin-bottom: 1.5rem;
+}
+
+.tag {
   font-size: 0.8rem;
-  letter-spacing: 0.05em;
-  opacity: 0.7;
+  letter-spacing: 2px;
+  border: 1px solid var(--mist-color);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+}
+
+/* --- LOGIKA ZIG-ZAG (JURUS KUNCINYA) --- */
+
+/* Project Genap (2, 4, dst) dibalik posisinya */
+.project-card:nth-child(even) {
+  flex-direction: row-reverse; /* Gambar kanan, Teks kiri */
+}
+
+/* Khusus Project Genap, teksnya geser ke kanan biar numpuknya pas */
+.project-card:nth-child(even) .card-info h3 {
+  margin-left: 0;
+  margin-right: -3rem;
+  text-align: right;
+}
+
+.project-card:nth-child(even) .card-info {
+  align-items: flex-end; /* Rata kanan */
+}
+
+/* --- MOBILE RESPONSIVE (Tetep Tumpuk) --- */
+@media (max-width: 768px) {
+  .project-card,
+  .project-card:nth-child(even) {
+    flex-direction: column; /* Balik jadi tumpuk di HP */
+    gap: 2rem;
+  }
+  .card-img-wrapper {
+    width: 100%;
+    height: 40vh;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); /* Buka full di HP */
+  }
+  .card-info,
+  .card-info h3 {
+    width: 100%;
+    margin: 0 !important; /* Reset margin negatif */
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+  .card-info h3 {
+    font-size: 3rem;
+  }
 }
 /* =========================================
    MOBILE RESPONSIVE FIXES
