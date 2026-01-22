@@ -866,36 +866,47 @@ a {
   }
 }
 
-/* TECH TICKER STYLE */
+/* TECH TICKER STYLE (UPDATED: SCHEMATIC MODE) */
 .tech-ticker {
   width: 100%;
-  background: var(--accent-color); /* Latar Merah biar Bold */
+  /* HAPUS background solid oranye */
+  background: transparent;
+  /* Ganti jadi garis border tipis di atas bawah */
+  border-top: 1px solid var(--accent-color);
+  border-bottom: 1px solid var(--accent-color);
+  /* Kasih background gelap transparan biar teks kebaca */
+  background: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(5px); /* Efek kaca buram dikit */
+
   overflow: hidden;
-  padding: 1rem 0;
-  transform: rotate(-2deg) scale(1.05); /* Miringin dikit biar rebel */
+  padding: 0.8rem 0; /* Padding dikecilin dikit biar lebih sleek */
+  transform: rotate(-2deg) scale(1.05);
   margin: 4rem 0;
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
+  z-index: 10; /* Pastiin dia di atas elemen lain */
 }
 
 .ticker-track {
   display: flex;
   width: fit-content;
-  animation: ticker-move 20s linear infinite;
+  animation: ticker-move 30s linear infinite; /* Diperlambat dikit biar elegan (dari 20s ke 30s) */
 }
 
 .ticker-content {
   font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--bg-color); /* Teks hitam di atas merah */
+  font-size: 1.3rem; /* Font dikecilin dikit */
+  font-weight: 700;
+  /* UBAH WARNA TEKS JADI ORANYE */
+  color: var(--accent-color);
   white-space: nowrap;
   padding-right: 2rem;
+  letter-spacing: 1px; /* Biar lebih teknikal */
 }
 
 .ticker-content .stroke {
-  color: white; /* Garis pemisah putih */
+  /* Ubah warna garis pemisah jadi abu transparan */
+  color: rgba(255, 255, 255, 0.2);
   margin: 0 1rem;
+  font-weight: 300;
 }
 
 @keyframes ticker-move {
