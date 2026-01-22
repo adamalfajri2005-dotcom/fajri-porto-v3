@@ -171,91 +171,39 @@ function toggleMenu() {
   menuOpen = !menuOpen;
 }
 
-// --- 8. LANYARD PHYSICS ENGINE ---
-const cardRig = document.getElementById("swinging-card");
-const sectionProfile = document.querySelector(".profile-section");
+// --- 8. PROFILE CARD REVEAL ANIMATION (NEW) ---
+const profileSection = document.querySelector(".profile-section");
+const engineerCard = document.querySelector(".engineer-card");
 
-if (cardRig && sectionProfile) {
-  // 1. ENTRANCE ANIMATION (Jatuh dari langit pas discroll)
-  gsap.set(cardRig, { rotation: 60, y: -500, opacity: 0 }); // Posisi awal (miring & di atas)
-
-  ScrollTrigger.create({
-    trigger: ".profile-section",
-    start: "top 60%", // Mulai pas section masuk layar
-    onEnter: () => {
-      gsap.to(cardRig, {
-        y: 0,
-        opacity: 1,
-        duration: 1.5,
-        ease: "bounce.out", // Efek jatuh mental
-      });
-
-      gsap.to(cardRig, {
-        rotation: 0,
-        duration: 2.5,
-        ease: "elastic.out(1, 0.3)", // Efek ngayun elastis
-        delay: 0.2,
-      });
+if (profileSection && engineerCard) {
+  // Buat Timeline biar animasinya berurutan
+  const profileTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".profile-section",
+      start: "top 70%", // Mulai pas section masuk 70% layar
+      toggleActions: "play none none reverse",
     },
   });
 
-  // 2. INTERACTIVE SWING (Pas Mouse Gerak/Drag)
-  let isDragging = false;
-
-  // Gerak ngikutin mouse (Hover Effect)
-  sectionProfile.addEventListener("mousemove", (e) => {
-    if (isDragging) return; // Kalau lagi ditarik, abaikan hover biasa
-
-    const rect = sectionProfile.getBoundingClientRect();
-    // Hitung posisi mouse relatif terhadap tengah section
-    const xPos = e.clientX - rect.left - rect.width / 2;
-
-    // Rotasi dikit aja (Maksimal 15 derajat)
-    const rotation = xPos / 20;
-
-    gsap.to(cardRig, {
-      rotation: rotation,
-      duration: 1,
-      ease: "power2.out",
-    });
+  // 1. Kartu Utama Muncul dari Bawah
+  profileTl.from(engineerCard, {
+    y: 100,
+    opacity: 0,
+    duration: 1,
+    ease: "power3.out",
   });
 
-  // Logic Klik & Tarik (Drag Effect)
-  cardRig.addEventListener("mousedown", () => {
-    isDragging = true;
-    cardRig.style.cursor = "grabbing";
-  });
-
-  window.addEventListener("mouseup", () => {
-    if (isDragging) {
-      isDragging = false;
-      cardRig.style.cursor = "grab";
-
-      // Lepas tali -> Mental balik ke tengah
-      gsap.to(cardRig, {
-        rotation: 0,
-        duration: 2,
-        ease: "elastic.out(1, 0.2)", // Mentalnya kenceng
-      });
-    }
-  });
-
-  window.addEventListener("mousemove", (e) => {
-    if (isDragging) {
-      const rect = sectionProfile.getBoundingClientRect();
-      // Kalau lagi ditarik, rotasinya bisa lebih ekstrim (bagi 10)
-      const xPos = e.clientX - rect.left - rect.width / 2;
-      let rotation = xPos / 5;
-
-      // Limit biar ga muter 360 derajat (Maks 60 derajat)
-      if (rotation > 60) rotation = 60;
-      if (rotation < -60) rotation = -60;
-
-      gsap.to(cardRig, {
-        rotation: rotation,
-        duration: 0.1, // Responsif banget pas ditarik
-        ease: "none",
-      });
-    }
-  });
+  // 2. Elemen di dalemnya muncul satu-satu (Stagger)
+  // Urutan: Foto -> Nama -> Teks Bio -> Footer Data
+  profileTl.from(
+    [".card-photo-side", ".info-header", ".info-body", ".info-footer"],
+    {
+      y: 30,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.2, // Jeda 0.2 detik antar elemen
+      ease: "power3.out",
+    },
+    "-=0.5",
+  ); // Mulai 0.5 detik sebelum animasi kartu selesai (Overlap)
 }
