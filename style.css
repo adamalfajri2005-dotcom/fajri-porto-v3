@@ -410,6 +410,12 @@ a {
     transform 0.3s;
 }
 
+/* Efek Hover buat Sertifikat */
+.cert-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--text-color) !important;
+}
+
 /* --- 11. FOOTER --- */
 .footer-section {
   height: 100vh;
