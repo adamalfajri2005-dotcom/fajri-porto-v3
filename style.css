@@ -666,3 +666,168 @@ a {
     padding: 0 1rem; /* Kasih nafas dikit kiri-kanan */
   }
 }
+
+/* =========================================
+   INTERACTIVE ID CARD LANYARD STYLE
+   ========================================= */
+
+/* Wrapper Kartu (Keseluruhan) */
+.interactive-card {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform-origin: top center; /* INI KUNCINYA: Goyang dari atas */
+  cursor: grab; /* Kursor tangan ngambil */
+}
+
+.interactive-card:active {
+  cursor: grabbing; /* Kursor tangan ngegegam */
+}
+
+/* 1. TALI LANYARD */
+.lanyard-strap {
+  width: 14px; /* Lebar tali */
+  height: 180px; /* Panjang tali */
+  background: repeating-linear-gradient(
+    45deg,
+    #1a1a1a,
+    #1a1a1a 10px,
+    #222 10px,
+    #222 20px
+  ); /* Efek tekstur kain tali */
+  position: relative;
+  z-index: 1;
+}
+
+/* Penjepit Besi di ujung tali */
+.strap-clip {
+  width: 24px;
+  height: 30px;
+  background: #555;
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 4px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* 2. BODY KARTU (PLASTIKNYA) */
+.id-card-body {
+  width: 280px;
+  height: 400px;
+  background: #e1e1e1; /* Warna dasar kartu putih tulang */
+  border-radius: 12px;
+  position: relative;
+  padding: 1.5rem;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.5),
+    /* Bayangan drop */ inset 0 0 0 1px rgba(0, 0, 0, 0.1); /* Garis tepi halus */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 2;
+  margin-top: 10px; /* Jarak dari jepitan */
+}
+
+/* Header Kartu (HIMTI) */
+.card-header {
+  width: 100%;
+  height: 50px;
+  background: var(--accent-color);
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 12px 12px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--bg-color);
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+}
+
+.punch-hole {
+  width: 40px;
+  height: 8px;
+  background: #333; /* Lubang tali */
+  position: absolute;
+  top: -15px; /* Nembus ke atas */
+  border-radius: 4px;
+}
+
+/* Konten Kartu */
+.card-content {
+  margin-top: 3rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.photo-frame {
+  width: 140px;
+  height: 160px;
+  border: 2px solid #ccc;
+  padding: 5px;
+  background: white;
+  margin-bottom: 1.5rem;
+}
+
+.id-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%); /* Hitam putih biar sangar */
+}
+
+.id-name {
+  font-family: var(--font-display);
+  color: #111; /* Teks hitam karena background putih */
+  font-size: 2rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.id-role {
+  font-family: "Courier New", monospace;
+  color: #555;
+  font-weight: bold;
+  font-size: 0.9rem;
+  background: #ccc;
+  padding: 2px 8px;
+}
+
+.barcode {
+  margin-top: 2rem;
+  font-family: "Courier New", monospace;
+  color: #333;
+  font-weight: 900;
+  font-size: 1.2rem;
+  letter-spacing: 3px;
+  transform: scaleX(1.5); /* Melarin biar kayak barcode */
+  opacity: 0.5;
+}
+
+/* Responsive HP */
+@media (max-width: 768px) {
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+  .id-card-wrapper {
+    height: 400px;
+    margin-bottom: 2rem;
+  }
+  .id-card-body {
+    transform: scale(0.9); /* Kecilin dikit di HP */
+  }
+}
