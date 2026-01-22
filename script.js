@@ -1,13 +1,58 @@
 // Register GSAP Plugins
 gsap.registerPlugin(ScrollTrigger);
 
+// --- 0. INITIALIZE SMOOTH SCROLL (LENIS) ---
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  smoothTouch: false, // Touchscreen normal aja biar ga berat
+});
+
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
+// Sambungin Lenis ke GSAP
+lenis.on("scroll", ScrollTrigger.update);
+gsap.ticker.add((time) => {
+  lenis.raf(time * 1000);
+});
+gsap.ticker.lagSmoothing(0);
+
+// --- 0.1 GLOBAL REVEAL ANIMATION (AWWWARDS STYLE) ---
+// Target semua elemen penting biar munculnya smooth dari bawah
+const revealElements = document.querySelectorAll(
+  ".section-title, .section-label, .about-text p, .project-card, .process-item",
+);
+
+revealElements.forEach((element) => {
+  gsap.fromTo(
+    element,
+    {
+      y: 50,
+      opacity: 0,
+    },
+    {
+      scrollTrigger: {
+        trigger: element,
+        start: "top 85%",
+        toggleActions: "play none none reverse",
+      },
+      y: 0,
+      opacity: 1,
+      duration: 1.2,
+      ease: "power3.out",
+    },
+  );
+});
+
 // --- 1. CUSTOM CURSOR LOGIC (DESKTOP ONLY) ---
-// Kita kasih "Satpam": Cuma jalan kalo layar lebar (> 768px)
 if (window.matchMedia("(min-width: 768px)").matches) {
   const cursor = document.getElementById("cursor");
   const hoverables = document.querySelectorAll(".hoverable");
 
-  // Gerakin cursor ngikutin mouse
   document.addEventListener("mousemove", (e) => {
     gsap.to(cursor, {
       x: e.clientX,
@@ -17,7 +62,6 @@ if (window.matchMedia("(min-width: 768px)").matches) {
     });
   });
 
-  // Efek Hover (Membesar)
   hoverables.forEach((el) => {
     el.addEventListener("mouseenter", () => cursor.classList.add("hovered"));
     el.addEventListener("mouseleave", () => cursor.classList.remove("hovered"));
@@ -28,7 +72,6 @@ if (window.matchMedia("(min-width: 768px)").matches) {
 const loaderText = document.getElementById("loader-text");
 let progress = 0;
 
-// Cek dulu elemennya ada ga (biar ga error)
 if (loaderText) {
   const loadingInterval = setInterval(() => {
     progress++;
@@ -53,6 +96,8 @@ function startEntranceAnim() {
       if (shutter) shutter.style.display = "none";
     },
   });
+
+  // Animasi Hero Text Muncul
   gsap.to(".reveal-hero", {
     y: 0,
     opacity: 1,
@@ -68,7 +113,6 @@ const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const scrambleElements = document.querySelectorAll(".scramble-hover");
 
 scrambleElements.forEach((item) => {
-  // Di HP ganti jadi click event biar ga aneh, atau biarin mouseover tapi jarang kepake
   item.addEventListener("mouseover", (event) => {
     let iteration = 0;
     clearInterval(item.interval);
@@ -89,26 +133,6 @@ scrambleElements.forEach((item) => {
     }, 30);
   });
 });
-
-// --- 4. SMOOTH SCROLL (LENIS) ---
-const lenis = new Lenis({
-  duration: 1.2,
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  // Di HP kita bikin scrollnya normal aja biar ga berat
-  smoothTouch: false,
-});
-
-function raf(time) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
-}
-requestAnimationFrame(raf);
-
-lenis.on("scroll", ScrollTrigger.update);
-gsap.ticker.add((time) => {
-  lenis.raf(time * 1000);
-});
-gsap.ticker.lagSmoothing(0);
 
 // --- 5. IMAGE REVEAL (DESKTOP ONLY) ---
 const revealImg = document.getElementById("reveal-img");
@@ -176,16 +200,14 @@ const profileSection = document.querySelector(".profile-section");
 const engineerCard = document.querySelector(".engineer-card");
 
 if (profileSection && engineerCard) {
-  // Buat Timeline biar animasinya berurutan
   const profileTl = gsap.timeline({
     scrollTrigger: {
       trigger: ".profile-section",
-      start: "top 70%", // Mulai pas section masuk 70% layar
+      start: "top 70%",
       toggleActions: "play none none reverse",
     },
   });
 
-  // 1. Kartu Utama Muncul dari Bawah
   profileTl.from(engineerCard, {
     y: 100,
     opacity: 0,
@@ -193,19 +215,17 @@ if (profileSection && engineerCard) {
     ease: "power3.out",
   });
 
-  // 2. Elemen di dalemnya muncul satu-satu (Stagger)
-  // Urutan: Foto -> Nama -> Teks Bio -> Footer Data
   profileTl.from(
     [".card-photo-side", ".info-header", ".info-body", ".info-footer"],
     {
       y: 30,
       opacity: 0,
       duration: 0.8,
-      stagger: 0.2, // Jeda 0.2 detik antar elemen
+      stagger: 0.2,
       ease: "power3.out",
     },
     "-=0.5",
-  ); // Mulai 0.5 detik sebelum animasi kartu selesai (Overlap)
+  );
 }
 
 // --- 9. COPY TO CLIPBOARD FEATURE ---
@@ -216,13 +236,10 @@ if (copyBtn && toast) {
   copyBtn.addEventListener("click", () => {
     const email = copyBtn.getAttribute("data-email");
 
-    // Perintah Copy
     navigator.clipboard.writeText(email).then(() => {
-      // Munculin Toast
       toast.style.opacity = "1";
       toast.style.transform = "translateX(-50%) translateY(0)";
 
-      // Umpetin lagi setelah 2 detik
       setTimeout(() => {
         toast.style.opacity = "0";
         toast.style.transform = "translateX(-50%) translateY(100px)";

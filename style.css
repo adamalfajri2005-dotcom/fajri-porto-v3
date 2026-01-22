@@ -8,6 +8,28 @@
   --font-body: "Satoshi", sans-serif;
 }
 
+/* --- LENIS SMOOTH SCROLL SETUP --- */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important; /* Matiin scroll bawaan biar Lenis yang handle */
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none; /* Biar iframe ga nge-lag pas discroll */
+}
+
 * {
   margin: 0;
   padding: 0;
