@@ -951,3 +951,82 @@ a {
     padding-left: 0;
   }
 }
+
+/* =========================================
+   NEW COMPACT MENU (TACTICAL DROPDOWN)
+   ========================================= */
+
+/* 1. KOTAK MENU (Panel Utamanya) */
+#menu-panel {
+  position: fixed;
+  top: 80px; /* Muncul pas di bawah Navbar */
+  right: 3rem; /* Rata kanan sejajar tombol MENU */
+  width: 250px;
+  background: #0a0a0a; /* Hitam pekat */
+  border: 1px solid rgba(255, 255, 255, 0.15); /* Garis tepi halus */
+  padding: 10px;
+  z-index: 800;
+
+  /* Awalnya Ngumpet */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px); /* Geser ke atas dikit */
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Pas Menu Aktif (Lewat JS nanti) */
+#menu-panel.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* 2. LIST MENU */
+.menu-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Jarak antar tombol */
+}
+
+/* 3. TOMBOL MENU (Itemnya) */
+.menu-item {
+  display: block;
+  background: rgba(255, 255, 255, 0.03); /* Abu super gelap */
+  padding: 1rem 1.5rem;
+  border: 1px solid transparent; /* Border transparan dulu */
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+/* TEKS DI DALAMNYA */
+.menu-text {
+  font-family: var(--font-display);
+  font-size: 1.1rem; /* Ukuran pas, ga raksasa */
+  font-weight: 600;
+  color: var(--mist-color);
+  transition: color 0.3s;
+}
+
+/* 4. EFEK NIMBUL (HOVER EFFECT) */
+.menu-item:hover {
+  background: rgba(255, 255, 255, 0.08); /* Jadi lebih terang */
+  transform: translateY(-3px); /* NAIK KE ATAS (Nimbul) */
+  border-color: rgba(255, 255, 255, 0.2); /* Border nyala dikit */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Bayangan di bawah biar kerasa 3D */
+}
+
+.menu-item:hover .menu-text {
+  color: var(--text-color); /* Teks jadi putih terang */
+  letter-spacing: 1px; /* Teks meregang dikit */
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+  #menu-panel {
+    right: 1.5rem; /* Sesuaikan margin HP */
+    width: 200px;
+  }
+}

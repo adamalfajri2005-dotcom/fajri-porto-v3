@@ -103,30 +103,24 @@
       </div>
     </nav>
 
-    <div id="menu-overlay">
-      <div class="menu-links">
-        <a
-          href="#about"
-          class="menu-link hoverable scramble-hover"
-          onclick="toggleMenu()"
-          data-value="PROFILE"
-          >PROFILE</a
-        >
-        <a
-          href="#work"
-          class="menu-link hoverable scramble-hover"
-          onclick="toggleMenu()"
-          data-value="SELECTED WORKS"
-          >SELECTED WORKS</a
-        >
-        <a
-          href="#contact"
-          class="menu-link hoverable scramble-hover"
-          onclick="toggleMenu()"
-          data-value="CONTACT"
-          >CONTACT</a
-        >
-      </div>
+    <div id="menu-panel" class="menu-hidden">
+      <ul class="menu-list">
+        <li>
+          <a href="#about" class="menu-item" onclick="toggleMenu()">
+            <span class="menu-text">PROFILE</span>
+          </a>
+        </li>
+        <li>
+          <a href="#work" class="menu-item" onclick="toggleMenu()">
+            <span class="menu-text">SELECTED WORKS</span>
+          </a>
+        </li>
+        <li>
+          <a href="#contact" class="menu-item" onclick="toggleMenu()">
+            <span class="menu-text">CONTACT</span>
+          </a>
+        </li>
+      </ul>
     </div>
 
     <div id="smooth-wrapper">

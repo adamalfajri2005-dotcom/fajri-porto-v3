@@ -178,33 +178,42 @@ if (window.matchMedia("(min-width: 768px)").matches && revealImg) {
   });
 }
 
-// --- 6. MENU OVERLAY ---
-let menuOpen = false;
-const menuTl = gsap.timeline({ paused: true });
-
-menuTl.to("#menu-overlay", {
-  y: "0%",
-  duration: 0.8,
-  ease: "power4.inOut",
-});
+// --- 6. COMPACT MENU TOGGLE ---
+const menuPanel = document.getElementById("menu-panel");
+const menuBtnText = document.getElementById("menu-btn-text");
+let isMenuOpen = false;
 
 function toggleMenu() {
-  const btnText = document.getElementById("menu-btn-text");
-  if (!menuOpen) {
-    menuTl.play();
-    if (btnText) {
-      btnText.innerText = "CLOSE";
-      btnText.dataset.value = "CLOSE";
+  if (!isMenuOpen) {
+    // BUKA MENU
+    menuPanel.classList.add("active");
+    if (menuBtnText) {
+      menuBtnText.innerText = "CLOSE";
+      menuBtnText.dataset.value = "CLOSE";
     }
+    isMenuOpen = true;
   } else {
-    menuTl.reverse();
-    if (btnText) {
-      btnText.innerText = "MENU";
-      btnText.dataset.value = "MENU";
+    // TUTUP MENU
+    menuPanel.classList.remove("active");
+    if (menuBtnText) {
+      menuBtnText.innerText = "MENU";
+      menuBtnText.dataset.value = "MENU";
     }
+    isMenuOpen = false;
   }
-  menuOpen = !menuOpen;
 }
+
+// Fitur Tambahan: Klik di luar menu buat nutup otomatis
+document.addEventListener("click", (e) => {
+  // Cek apakah kliknya BUKAN di dalam menu DAN BUKAN di tombol menu
+  if (
+    isMenuOpen &&
+    !menuPanel.contains(e.target) &&
+    !e.target.closest(".menu-btn")
+  ) {
+    toggleMenu();
+  }
+});
 
 // --- 8. PROFILE CARD REVEAL ANIMATION (NEW) ---
 const profileSection = document.querySelector(".profile-section");
