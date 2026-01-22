@@ -207,3 +207,26 @@ if (profileSection && engineerCard) {
     "-=0.5",
   ); // Mulai 0.5 detik sebelum animasi kartu selesai (Overlap)
 }
+
+// --- 9. COPY TO CLIPBOARD FEATURE ---
+const copyBtn = document.getElementById("copyBtn");
+const toast = document.getElementById("toast");
+
+if (copyBtn && toast) {
+  copyBtn.addEventListener("click", () => {
+    const email = copyBtn.getAttribute("data-email");
+
+    // Perintah Copy
+    navigator.clipboard.writeText(email).then(() => {
+      // Munculin Toast
+      toast.style.opacity = "1";
+      toast.style.transform = "translateX(-50%) translateY(0)";
+
+      // Umpetin lagi setelah 2 detik
+      setTimeout(() => {
+        toast.style.opacity = "0";
+        toast.style.transform = "translateX(-50%) translateY(100px)";
+      }, 2500);
+    });
+  });
+}

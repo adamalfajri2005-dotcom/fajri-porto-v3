@@ -152,22 +152,48 @@
 
                 <div class="info-footer">
                   <div class="data-point">
-                    <span class="data-label">SEMESTER</span>
-                    <span class="data-value">03</span>
-                  </div>
-                  <div class="data-point">
                     <span class="data-label">STATUS</span>
-                    <span class="data-value">ACTIVE STUDENT</span>
+                    <div
+                      style="display: flex; align-items: center; gap: 0.5rem"
+                    >
+                      <span class="status-dot"></span>
+                      <span class="data-value" style="color: #4ade80"
+                        >OPEN TO WORK</span
+                      >
+                    </div>
                   </div>
                   <div class="data-point">
                     <span class="data-label">FOCUS</span>
-                    <span class="data-value">LOGIC & UI/UX</span>
+                    <span class="data-value">FULL STACK & NETWORK</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
+
+        <div class="tech-ticker">
+          <div class="ticker-track">
+            <div class="ticker-content">
+              PYTHON <span class="stroke">///</span> JAVA (ORACLE)
+              <span class="stroke">///</span> CISCO NETWORKING
+              <span class="stroke">///</span> FIGMA UI/UX
+              <span class="stroke">///</span> HUAWEI CLOUD
+              <span class="stroke">///</span> HTML/CSS/JS
+              <span class="stroke">///</span> SQL DATABASE
+              <span class="stroke">///</span>
+            </div>
+            <div class="ticker-content">
+              PYTHON <span class="stroke">///</span> JAVA (ORACLE)
+              <span class="stroke">///</span> CISCO NETWORKING
+              <span class="stroke">///</span> FIGMA UI/UX
+              <span class="stroke">///</span> HUAWEI CLOUD
+              <span class="stroke">///</span> HTML/CSS/JS
+              <span class="stroke">///</span> SQL DATABASE
+              <span class="stroke">///</span>
+            </div>
+          </div>
+        </div>
 
         <section id="about" class="about-section">
           <div class="container grid-layout">
@@ -606,16 +632,82 @@
           </div>
         </section>
 
+        <section
+          class="process-section"
+          style="
+            padding: 6rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+          "
+        >
+          <div class="container">
+            <span class="section-label">/// THE ALGORITHM</span>
+            <h2 class="section-title" style="margin-bottom: 4rem">
+              HOW I COOK.
+            </h2>
+
+            <div class="process-grid">
+              <div class="process-item">
+                <span class="process-num">01</span>
+                <h3>DECONSTRUCT</h3>
+                <p>
+                  Every project starts with logic. I break down complex problems
+                  into solvable data structures before writing a single line of
+                  code.
+                </p>
+              </div>
+              <div class="process-item">
+                <span class="process-num">02</span>
+                <h3>VISUALIZE</h3>
+                <p>
+                  Functionality needs form. I design interfaces in Figma that
+                  make the backend logic feel intuitive and human-friendly.
+                </p>
+              </div>
+              <div class="process-item">
+                <span class="process-num">03</span>
+                <h3>EXECUTE</h3>
+                <p>
+                  Clean syntax. Optimized queries. Responsive layout. I build
+                  systems that are as robust as they are beautiful.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <footer id="contact" class="footer-section">
           <p class="footer-cta-label">GOT A CRAZY IDEA?</p>
-          <a
-            href="mailto:adamalfajri2005@gmail.com"
-            class="hoverable footer-link"
+          <div
+            id="copyBtn"
+            class="big-cta scramble-hover"
+            data-email="adamalfajri2005@gmail.com"
+            data-value="LET'S COOK"
+            style="cursor: pointer"
           >
-            <h2 class="big-cta scramble-hover" data-value="LET'S COOK">
-              LET'S COOK
-            </h2>
-          </a>
+            LET'S COOK
+          </div>
+
+          <div
+            id="toast"
+            style="
+              position: fixed;
+              bottom: 2rem;
+              left: 50%;
+              transform: translateX(-50%) translateY(100px);
+              background: var(--accent-color);
+              color: black;
+              padding: 1rem 2rem;
+              border-radius: 50px;
+              font-family: &quot;Courier New&quot;, monospace;
+              font-weight: bold;
+              opacity: 0;
+              transition: all 0.5s;
+              z-index: 9999;
+              white-space: nowrap;
+            "
+          >
+            INGREDIENTS (EMAIL) COPIED! 👨‍🍳
+          </div>
 
           <div class="footer-bottom">
             <span>ADAM ALFAJRI © 2026</span>

@@ -817,3 +817,115 @@ a {
     gap: 1.5rem;
   }
 }
+
+/* STATUS BEACON ANIMATION */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #4ade80; /* Hijau terang */
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7);
+  animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(74, 222, 128, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0);
+  }
+}
+
+/* TECH TICKER STYLE */
+.tech-ticker {
+  width: 100%;
+  background: var(--accent-color); /* Latar Merah biar Bold */
+  overflow: hidden;
+  padding: 1rem 0;
+  transform: rotate(-2deg) scale(1.05); /* Miringin dikit biar rebel */
+  margin: 4rem 0;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+}
+
+.ticker-track {
+  display: flex;
+  width: fit-content;
+  animation: ticker-move 20s linear infinite;
+}
+
+.ticker-content {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--bg-color); /* Teks hitam di atas merah */
+  white-space: nowrap;
+  padding-right: 2rem;
+}
+
+.ticker-content .stroke {
+  color: white; /* Garis pemisah putih */
+  margin: 0 1rem;
+}
+
+@keyframes ticker-move {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* PROCESS SECTION STYLE */
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.process-item {
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  padding-left: 2rem;
+  padding-bottom: 2rem;
+}
+
+.process-num {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  color: rgba(255, 255, 255, 0.1); /* Angka transparan */
+  display: block;
+  margin-bottom: -1rem;
+}
+
+.process-item h3 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--accent-color);
+}
+
+.process-item p {
+  color: var(--mist-color);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .process-grid {
+    grid-template-columns: 1fr;
+  } /* Stack di HP */
+  .process-item {
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 2rem;
+    padding-left: 0;
+  }
+}
