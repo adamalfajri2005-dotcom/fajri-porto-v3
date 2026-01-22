@@ -1,3 +1,14 @@
+// --- 00. DEVELOPER SIGNATURE ---
+console.log(
+  "%c  ADAM ALFAJRI  \n%c  VISUAL THINKER  ",
+  "color: black; background: #ff3300; font-size: 24px; font-weight: bold; padding: 10px; border-radius: 4px;",
+  "color: #ff3300; background: #050505; font-size: 16px; padding: 5px; border: 1px solid #ff3300; border-radius: 4px;",
+);
+console.log(
+  "%cLooking at the code? Let's cook something together: adamalfajri2005@gmail.com 👨‍🍳",
+  "color: #888; font-family: monospace; font-size: 12px; margin-top: 5px;",
+);
+
 // Register GSAP Plugins
 gsap.registerPlugin(ScrollTrigger);
 
