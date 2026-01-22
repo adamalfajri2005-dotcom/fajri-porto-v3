@@ -67,6 +67,37 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <script>
+      // Cek apakah di Laptop (Layar Besar)
+      if (window.matchMedia("(min-width: 768px)").matches) {
+        const cursor = document.getElementById("cursor");
+        const hoverables = document.querySelectorAll(".hoverable");
+
+        // Set posisi awal biar bener-bener di tengah (xPercent/yPercent)
+        gsap.set(cursor, { xPercent: -50, yPercent: -50 });
+
+        // LOGIKA GERAK (Mouse Follower)
+        document.addEventListener("mousemove", (e) => {
+          gsap.to(cursor, {
+            x: e.clientX,
+            y: e.clientY,
+            duration: 0.1, // Responsif, ga terlalu delay
+            ease: "power2.out",
+          });
+        });
+
+        // LOGIKA HOVER (Membesar pas kena tombol/teks)
+        hoverables.forEach((el) => {
+          el.addEventListener("mouseenter", () =>
+            cursor.classList.add("hovered"),
+          );
+          el.addEventListener("mouseleave", () =>
+            cursor.classList.remove("hovered"),
+          );
+        });
+      }
+    </script>
   </body>
 </html>
