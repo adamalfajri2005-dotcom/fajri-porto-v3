@@ -228,26 +228,37 @@
               class="cert-grid"
               style="
                 display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-                gap: 2rem;
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+                gap: 3rem;
               "
             >
-              <div
-                class="cert-card hoverable"
-                style="
-                  border: 1px solid rgba(255, 255, 255, 0.1);
-                  padding: 2rem;
-                  transition: background 0.3s;
-                "
-              >
+              <div class="cert-item hoverable" style="cursor: pointer">
+                <div
+                  style="
+                    width: 100%;
+                    height: 250px;
+                    overflow: hidden;
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    margin-bottom: 1.5rem;
+                  "
+                >
+                  <img
+                    src="assets/cert-1.jpg"
+                    alt="CCNA Certificate"
+                    style="
+                      width: 100%;
+                      height: 100%;
+                      object-fit: cover;
+                      filter: grayscale(100%);
+                      transition: filter 0.5s;
+                    "
+                    onmouseover="this.style.filter = 'grayscale(0%)'"
+                    onmouseout="this.style.filter = 'grayscale(100%)'"
+                  />
+                </div>
                 <span
                   class="tag"
-                  style="
-                    color: var(--accent-color);
-                    border-color: var(--accent-color);
-                    margin-bottom: 1rem;
-                    display: inline-block;
-                  "
+                  style="margin-bottom: 0.5rem; display: inline-block"
                   >NETWORKING</span
                 >
                 <h3
@@ -259,37 +270,45 @@
                 >
                   CCNA: Switching & Routing
                 </h3>
-                <p style="color: var(--mist-color); font-size: 0.9rem">
-                  Cisco Networking Academy
-                </p>
-                <span
+                <p
                   style="
-                    font-family: &quot;Courier New&quot;, monospace;
-                    font-size: 0.8rem;
-                    color: #555;
-                    display: block;
-                    margin-top: 1rem;
+                    color: var(--mist-color);
+                    font-size: 0.9rem;
+                    line-height: 1.5;
                   "
-                  >ISSUED: JAN 2026</span
                 >
+                  Mastered advanced network configuration, VLANs, and wireless
+                  security protocols using Cisco devices.
+                </p>
               </div>
 
-              <div
-                class="cert-card hoverable"
-                style="
-                  border: 1px solid rgba(255, 255, 255, 0.1);
-                  padding: 2rem;
-                  transition: background 0.3s;
-                "
-              >
+              <div class="cert-item hoverable" style="cursor: pointer">
+                <div
+                  style="
+                    width: 100%;
+                    height: 250px;
+                    overflow: hidden;
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    margin-bottom: 1.5rem;
+                  "
+                >
+                  <img
+                    src="assets/cert-2.jpg"
+                    alt="CCNA Intro"
+                    style="
+                      width: 100%;
+                      height: 100%;
+                      object-fit: cover;
+                      filter: grayscale(100%);
+                      transition: filter 0.5s;
+                    "
+                    onmouseover="this.style.filter = 'grayscale(0%)'"
+                    onmouseout="this.style.filter = 'grayscale(100%)'"
+                  />
+                </div>
                 <span
                   class="tag"
-                  style="
-                    color: var(--accent-color);
-                    border-color: var(--accent-color);
-                    margin-bottom: 1rem;
-                    display: inline-block;
-                  "
+                  style="margin-bottom: 0.5rem; display: inline-block"
                   >NETWORKING</span
                 >
                 <h3
@@ -301,37 +320,45 @@
                 >
                   CCNA: Intro to Networks
                 </h3>
-                <p style="color: var(--mist-color); font-size: 0.9rem">
-                  Cisco Networking Academy
-                </p>
-                <span
+                <p
                   style="
-                    font-family: &quot;Courier New&quot;, monospace;
-                    font-size: 0.8rem;
-                    color: #555;
-                    display: block;
-                    margin-top: 1rem;
+                    color: var(--mist-color);
+                    font-size: 0.9rem;
+                    line-height: 1.5;
                   "
-                  >ISSUED: LATE 2025</span
                 >
+                  Foundational understanding of network architecture, IP
+                  addressing, and Ethernet protocols.
+                </p>
               </div>
 
-              <div
-                class="cert-card hoverable"
-                style="
-                  border: 1px solid rgba(255, 255, 255, 0.1);
-                  padding: 2rem;
-                  transition: background 0.3s;
-                "
-              >
+              <div class="cert-item hoverable" style="cursor: pointer">
+                <div
+                  style="
+                    width: 100%;
+                    height: 250px;
+                    overflow: hidden;
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    margin-bottom: 1.5rem;
+                  "
+                >
+                  <img
+                    src="assets/cert-3.jpg"
+                    alt="Huawei Cloud"
+                    style="
+                      width: 100%;
+                      height: 100%;
+                      object-fit: cover;
+                      filter: grayscale(100%);
+                      transition: filter 0.5s;
+                    "
+                    onmouseover="this.style.filter = 'grayscale(0%)'"
+                    onmouseout="this.style.filter = 'grayscale(100%)'"
+                  />
+                </div>
                 <span
                   class="tag"
-                  style="
-                    color: var(--accent-color);
-                    border-color: var(--accent-color);
-                    margin-bottom: 1rem;
-                    display: inline-block;
-                  "
+                  style="margin-bottom: 0.5rem; display: inline-block"
                   >CLOUD COMP.</span
                 >
                 <h3
@@ -343,37 +370,45 @@
                 >
                   Cloud Basics Dev
                 </h3>
-                <p style="color: var(--mist-color); font-size: 0.9rem">
-                  Huawei ICT Academy
-                </p>
-                <span
+                <p
                   style="
-                    font-family: &quot;Courier New&quot;, monospace;
-                    font-size: 0.8rem;
-                    color: #555;
-                    display: block;
-                    margin-top: 1rem;
+                    color: var(--mist-color);
+                    font-size: 0.9rem;
+                    line-height: 1.5;
                   "
-                  >ISSUED: DEC 2025</span
                 >
+                  Understanding cloud computing fundamentals, virtualization,
+                  and Huawei Cloud services ecosystem.
+                </p>
               </div>
 
-              <div
-                class="cert-card hoverable"
-                style="
-                  border: 1px solid rgba(255, 255, 255, 0.1);
-                  padding: 2rem;
-                  transition: background 0.3s;
-                "
-              >
+              <div class="cert-item hoverable" style="cursor: pointer">
+                <div
+                  style="
+                    width: 100%;
+                    height: 250px;
+                    overflow: hidden;
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    margin-bottom: 1.5rem;
+                  "
+                >
+                  <img
+                    src="assets/cert-4.jpg"
+                    alt="Java Foundations"
+                    style="
+                      width: 100%;
+                      height: 100%;
+                      object-fit: cover;
+                      filter: grayscale(100%);
+                      transition: filter 0.5s;
+                    "
+                    onmouseover="this.style.filter = 'grayscale(0%)'"
+                    onmouseout="this.style.filter = 'grayscale(100%)'"
+                  />
+                </div>
                 <span
                   class="tag"
-                  style="
-                    color: var(--accent-color);
-                    border-color: var(--accent-color);
-                    margin-bottom: 1rem;
-                    display: inline-block;
-                  "
+                  style="margin-bottom: 0.5rem; display: inline-block"
                   >BACKEND</span
                 >
                 <h3
@@ -385,37 +420,45 @@
                 >
                   Java Foundations
                 </h3>
-                <p style="color: var(--mist-color); font-size: 0.9rem">
-                  Oracle Academy
-                </p>
-                <span
+                <p
                   style="
-                    font-family: &quot;Courier New&quot;, monospace;
-                    font-size: 0.8rem;
-                    color: #555;
-                    display: block;
-                    margin-top: 1rem;
+                    color: var(--mist-color);
+                    font-size: 0.9rem;
+                    line-height: 1.5;
                   "
-                  >ISSUED: DEC 2024</span
                 >
+                  Deep dive into Object Oriented Programming (OOP), data
+                  structures, and Java API utilization.
+                </p>
               </div>
 
-              <div
-                class="cert-card hoverable"
-                style="
-                  border: 1px solid rgba(255, 255, 255, 0.1);
-                  padding: 2rem;
-                  transition: background 0.3s;
-                "
-              >
+              <div class="cert-item hoverable" style="cursor: pointer">
+                <div
+                  style="
+                    width: 100%;
+                    height: 250px;
+                    overflow: hidden;
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    margin-bottom: 1.5rem;
+                  "
+                >
+                  <img
+                    src="assets/cert-5.jpg"
+                    alt="Java Fundamentals"
+                    style="
+                      width: 100%;
+                      height: 100%;
+                      object-fit: cover;
+                      filter: grayscale(100%);
+                      transition: filter 0.5s;
+                    "
+                    onmouseover="this.style.filter = 'grayscale(0%)'"
+                    onmouseout="this.style.filter = 'grayscale(100%)'"
+                  />
+                </div>
                 <span
                   class="tag"
-                  style="
-                    color: var(--accent-color);
-                    border-color: var(--accent-color);
-                    margin-bottom: 1rem;
-                    display: inline-block;
-                  "
+                  style="margin-bottom: 0.5rem; display: inline-block"
                   >BACKEND</span
                 >
                 <h3
@@ -427,19 +470,16 @@
                 >
                   Java Fundamentals
                 </h3>
-                <p style="color: var(--mist-color); font-size: 0.9rem">
-                  Oracle Academy
-                </p>
-                <span
+                <p
                   style="
-                    font-family: &quot;Courier New&quot;, monospace;
-                    font-size: 0.8rem;
-                    color: #555;
-                    display: block;
-                    margin-top: 1rem;
+                    color: var(--mist-color);
+                    font-size: 0.9rem;
+                    line-height: 1.5;
                   "
-                  >ISSUED: NOV 2024</span
                 >
+                  Basic programming concepts, Alice 3, and Greenfoot to
+                  understand logic and syntax.
+                </p>
               </div>
             </div>
           </div>
