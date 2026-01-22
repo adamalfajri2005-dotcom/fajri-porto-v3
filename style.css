@@ -1141,3 +1141,38 @@ a {
     text-align: center;
   }
 }
+
+/* --- MICRO POLISH: CUSTOM SELECTION --- */
+::selection {
+  background: var(--accent-color); /* Warna Oren */
+  color: #000000; /* Teks Hitam */
+  text-shadow: none;
+}
+::-moz-selection {
+  background: var(--accent-color);
+  color: #000000;
+  text-shadow: none;
+}
+
+/* --- MICRO POLISH: CUSTOM SCROLLBAR --- */
+/* Lebar scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track (Jalurnya) */
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+/* Handle (Batangnya) */
+::-webkit-scrollbar-thumb {
+  background: #333; /* Abu gelap */
+  border-radius: 5px;
+  border: 2px solid #0a0a0a; /* Kasih border biar ada jarak */
+}
+
+/* Pas di-hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color); /* Jadi Oren pas disentuh */
+}
