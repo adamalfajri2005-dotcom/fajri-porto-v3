@@ -460,123 +460,107 @@ a {
 }
 
 /* =========================================
-   AWWWARDS STYLE: EDITORIAL ZIG-ZAG
+   FIXED: INDUSTRIAL CARD GRID (PADET & RAPI)
+   (Timpa bagian project yang tadi)
    ========================================= */
 
 #work .container {
-  padding: 0 4rem; /* Kasih nafas kiri kanan lebih lega */
+  padding: 0 2rem; /* Balikin padding normal */
 }
 
+/* GRID SYSTEM: 2 Kolom Rapi */
 .projects-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 10rem; /* Jarak antar project jauh biar eksklusif */
-  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 Kolom */
+  gap: 2rem; /* Jarak antar kartu pas (gak jauh banget) */
+  margin-top: 3rem;
 }
 
+/* KARTU PROJECT (Biar gak kopong, kita kasih 'Wadah') */
 .project-card {
   display: flex;
-  align-items: center; /* Vertikal center */
-  gap: 4rem; /* Jarak antara Gambar dan Teks */
-  width: 100%;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.03); /* Latar abu super tipis */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Garis tepi biar TEGAS */
+  padding: 1.5rem; /* Jarak dalem kartu */
+  transition:
+    border-color 0.3s,
+    transform 0.3s;
 }
 
-/* GAMBARNYA */
+.project-card:hover {
+  border-color: var(--accent-color); /* Nyala merah pas hover */
+  transform: translateY(-5px); /* Naik dikit */
+}
+
+/* GAMBAR (Full Width di dalem kartu) */
 .card-img-wrapper {
-  width: 55%; /* Gambar ambil 55% lebar layar */
-  height: 65vh; /* Tinggi proporsional */
+  width: 100%;
+  height: 300px; /* Tinggi fix biar seragam */
   overflow: hidden;
-  position: relative;
-  /* Efek Reveal Tirai (Akan dianimasiin JS nanti) */
-  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-  transition: transform 0.5s ease;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .project-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: scale(1.2); /* Zoom in dikit biar bisa parallax */
-  transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: transform 0.5s;
 }
 
-/* TEKSNYA */
+.project-card:hover .project-img {
+  transform: scale(1.05); /* Zoom dikit pas hover */
+}
+
+/* INFO TEKS (Di bawah gambar, rapi) */
 .card-info {
-  width: 45%;
-  position: relative; /* Balikin posisi normal (bukan absolute) */
-  bottom: auto;
-  left: auto;
+  position: relative;
+  width: 100%;
+  margin: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  z-index: 2;
+  padding: 0 0.5rem;
 }
 
 .card-info h3 {
   font-family: var(--font-display);
-  font-size: 4rem; /* Judul Gede */
-  line-height: 0.9;
-  margin-bottom: 1rem;
+  font-size: 2rem; /* Ukuran Judul PAS (gak raksasa) */
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
   color: var(--text-color);
-  /* Sedikit geser teks biar numpuk ke gambar (Artistic Touch) */
-  margin-left: -3rem;
-  mix-blend-mode: exclusion; /* Biar warnanya kontras kalau kena gambar */
+  mix-blend-mode: normal; /* Normalin warnanya */
 }
 
 .card-info p {
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: var(--mist-color);
-  max-width: 300px;
-  margin-bottom: 1.5rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  max-width: 100%;
 }
 
 .tag {
-  font-size: 0.8rem;
-  letter-spacing: 2px;
-  border: 1px solid var(--mist-color);
-  padding: 0.5rem 1rem;
-  border-radius: 50px;
+  font-size: 0.75rem;
+  font-family: "Courier New", monospace;
+  color: var(--accent-color);
+  border: 1px solid var(--accent-color);
+  padding: 4px 12px;
+  border-radius: 0; /* Kotak biar industrial */
 }
 
-/* --- LOGIKA ZIG-ZAG (JURUS KUNCINYA) --- */
-
-/* Project Genap (2, 4, dst) dibalik posisinya */
-.project-card:nth-child(even) {
-  flex-direction: row-reverse; /* Gambar kanan, Teks kiri */
-}
-
-/* Khusus Project Genap, teksnya geser ke kanan biar numpuknya pas */
-.project-card:nth-child(even) .card-info h3 {
-  margin-left: 0;
-  margin-right: -3rem;
-  text-align: right;
-}
-
-.project-card:nth-child(even) .card-info {
-  align-items: flex-end; /* Rata kanan */
-}
-
-/* --- MOBILE RESPONSIVE (Tetep Tumpuk) --- */
+/* --- RESPONSIVE HP --- */
 @media (max-width: 768px) {
-  .project-card,
-  .project-card:nth-child(even) {
-    flex-direction: column; /* Balik jadi tumpuk di HP */
+  .projects-grid {
+    grid-template-columns: 1fr; /* 1 Kolom di HP */
     gap: 2rem;
   }
   .card-img-wrapper {
-    width: 100%;
-    height: 40vh;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); /* Buka full di HP */
-  }
-  .card-info,
-  .card-info h3 {
-    width: 100%;
-    margin: 0 !important; /* Reset margin negatif */
-    align-items: flex-start !important;
-    text-align: left !important;
+    height: 220px; /* Gambar lebih pendek di HP */
   }
   .card-info h3 {
-    font-size: 3rem;
+    font-size: 1.8rem;
   }
 }
 /* =========================================

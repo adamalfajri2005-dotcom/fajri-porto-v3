@@ -153,43 +153,6 @@ menuTl.to("#menu-overlay", {
   ease: "power4.inOut",
 });
 
-// --- 7. PROJECT REVEAL ANIMATION (AWWWARDS STYLE) ---
-const projectCards = document.querySelectorAll(".project-card");
-
-projectCards.forEach((card) => {
-  const imgWrapper = card.querySelector(".card-img-wrapper");
-  const img = card.querySelector(".project-img");
-
-  // Animasi 1: Tirai Terbuka (Clip Path)
-  gsap.to(imgWrapper, {
-    scrollTrigger: {
-      trigger: card,
-      start: "top 80%", // Mulai pas elemen masuk 80% layar
-      end: "top 20%",
-      toggleActions: "play none none reverse",
-    },
-    clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)", // Buka full
-    duration: 1.2,
-    ease: "power4.inOut",
-  });
-
-  // Animasi 2: Gambar Zoom Out (Parallax halus)
-  gsap.fromTo(
-    img,
-    { scale: 1.3 }, // Mulai dari agak nge-zoom
-    {
-      scale: 1, // Jadi normal pas scroll
-      scrollTrigger: {
-        trigger: card,
-        start: "top 100%",
-        end: "bottom 0%",
-        scrub: true, // Gerak ngikutin scroll mouse
-      },
-      ease: "none",
-    },
-  );
-});
-
 function toggleMenu() {
   const btnText = document.getElementById("menu-btn-text");
   if (!menuOpen) {
