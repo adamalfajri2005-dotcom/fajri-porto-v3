@@ -307,36 +307,36 @@
               </a>
             </div>
 
-            <div class="project-card hoverable">
-              <a href="project-bakery.html">
-                <div class="card-img-wrapper">
-                  <img
-                    src="assets/p2.jpg"
-                    alt="Bakery DB"
-                    class="project-img"
-                  />
-                </div>
-                <div class="card-info">
-                  <h3>Business Logic System</h3>
-                  <span class="tag">ORACLE SQL</span>
-                </div>
-              </a>
+            <div
+              class="project-card hoverable"
+              onclick="openDrawer('bakery')"
+              style="cursor: pointer"
+            >
+              <div class="card-img-wrapper">
+                <img src="assets/p2.jpg" alt="Bakery DB" class="project-img" />
+              </div>
+              <div class="card-info">
+                <h3>Business Logic System</h3>
+                <span class="tag">ORACLE SQL</span>
+              </div>
             </div>
 
-            <div class="project-card hoverable">
-              <a href="project-mabing.html">
-                <div class="card-img-wrapper">
-                  <img
-                    src="assets/p3.jpg"
-                    alt="Mabing Crisis"
-                    class="project-img"
-                  />
-                </div>
-                <div class="card-info">
-                  <h3>Crisis Management</h3>
-                  <span class="tag">LEADERSHIP</span>
-                </div>
-              </a>
+            <div
+              class="project-card hoverable"
+              onclick="openDrawer('mabing')"
+              style="cursor: pointer"
+            >
+              <div class="card-img-wrapper">
+                <img
+                  src="assets/p3.jpg"
+                  alt="Mabing Crisis"
+                  class="project-img"
+                />
+              </div>
+              <div class="card-info">
+                <h3>Crisis Management</h3>
+                <span class="tag">LEADERSHIP</span>
+              </div>
             </div>
           </div>
         </section>
@@ -830,6 +830,107 @@
             <span class="credits">ENGINEERED WITH PASSION & LOGIC.</span>
           </div>
         </footer>
+      </div>
+    </div>
+    <div id="project-drawer" class="drawer-container">
+      <div class="drawer-backdrop" onclick="closeDrawer()"></div>
+
+      <div class="drawer-panel">
+        <div class="drawer-header">
+          <button class="drawer-close-btn" onclick="closeDrawer()">
+            [CLOSE_PANEL_X]
+          </button>
+        </div>
+
+        <div id="content-bakery" class="drawer-content hidden">
+          <h2 class="blueprint-title">BAKERY DB_LOGIC</h2>
+
+          <div class="blueprint-meta">
+            <span class="meta-tag">YEAR: 2025</span>
+            <span class="meta-tag">ROLE: LOGIC DESIGNER</span>
+            <span class="status-live">● SYSTEM LIVE</span>
+          </div>
+
+          <div class="blueprint-frame">
+            <img src="assets/p2.jpg" alt="Database ERD" class="blueprint-img" />
+            <div class="frame-overlay"></div>
+          </div>
+
+          <div class="specs-grid">
+            <div class="spec-col">
+              <span class="spec-label">/// CHALLENGE</span>
+              <p class="spec-desc">
+                Manual recording of stock & sales created a messy inventory
+                system. Data inconsistency led to financial leaks in the bakery
+                business.
+              </p>
+            </div>
+            <div class="spec-col">
+              <span class="spec-label">/// SOLUTION</span>
+              <p class="spec-desc">
+                Engineered a robust
+                <strong>Entity Relationship Diagram (ERD)</strong>. Every bread
+                transaction automatically triggers raw material deductions via
+                SQL Triggers.
+              </p>
+            </div>
+          </div>
+
+          <div class="tech-row">
+            <span class="spec-label">STACK_USED:</span>
+            <div class="tech-tags">
+              <span>ORACLE_DB</span>
+              <span>SQL_LOGIC</span>
+              <span>ERD_DESIGN</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="content-mabing" class="drawer-content hidden">
+          <h2 class="blueprint-title">MENTORING_SYSTEM</h2>
+
+          <div class="blueprint-meta">
+            <span class="meta-tag">YEAR: 2025</span>
+            <span class="meta-tag">ROLE: CO-PROJECT MANAGER</span>
+            <span class="status-live">● EVENT SUCCESS</span>
+          </div>
+
+          <div class="blueprint-frame">
+            <img
+              src="assets/p3.jpg"
+              alt="Mentoring Atmosphere"
+              class="blueprint-img"
+            />
+            <div class="frame-overlay"></div>
+          </div>
+
+          <div class="specs-grid">
+            <div class="spec-col">
+              <span class="spec-label">/// MISSION</span>
+              <p class="spec-desc">
+                Onboarding 100+ new Informatics students. The goal wasn't just
+                logistics, but building a solid culture for the Class of 2025.
+              </p>
+            </div>
+            <div class="spec-col">
+              <span class="spec-label">/// EXECUTION</span>
+              <p class="spec-desc">
+                Coordinated <strong>26 Mentors</strong> across 9 intensive
+                sessions. Managed crisis resolution and on-site logistics to
+                ensure zero friction during the event.
+              </p>
+            </div>
+          </div>
+
+          <div class="tech-row">
+            <span class="spec-label">CORE_SKILLS:</span>
+            <div class="tech-tags">
+              <span>CRISIS_MGMT</span>
+              <span>LOGISTICS</span>
+              <span>PUBLIC_SPEAKING</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <script src="script.js"></script>

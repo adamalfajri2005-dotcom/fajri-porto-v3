@@ -267,3 +267,36 @@ if (copyBtn && toast) {
     });
   });
 }
+
+// =========================================
+// INSPECTOR DRAWER LOGIC
+// =========================================
+function openDrawer(projectId) {
+  const drawer = document.getElementById("project-drawer");
+  const allContents = document.querySelectorAll(".drawer-content");
+
+  // 1. Umpetin semua konten dulu
+  allContents.forEach((el) => el.classList.add("hidden"));
+
+  // 2. Munculin konten yang dipilih
+  const targetContent = document.getElementById("content-" + projectId);
+  if (targetContent) {
+    targetContent.classList.remove("hidden");
+  }
+
+  // 3. Buka Drawernya (Slide-in)
+  drawer.classList.add("open");
+
+  // 4. Stop scroll body biar fokus di drawer
+  document.body.style.overflow = "hidden";
+}
+
+function closeDrawer() {
+  const drawer = document.getElementById("project-drawer");
+
+  // 1. Tutup Drawer
+  drawer.classList.remove("open");
+
+  // 2. Balikin scroll body
+  document.body.style.overflow = "auto";
+}

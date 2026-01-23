@@ -1245,3 +1245,175 @@ p,
 .role-badge {
   font-variant-numeric: tabular-nums; /* Biar angka lurus sejajar (penting buat engineer) */
 }
+
+/* =========================================
+   INSPECTOR DRAWER (SLIDE-IN PANEL)
+   ========================================= */
+
+/* 1. CONTAINER UTAMA (Wadah) */
+.drawer-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 10000; /* Paling atas */
+  pointer-events: none; /* Biar tembus kalo lagi nutup */
+}
+
+/* 2. BACKDROP (Latar Gelap) */
+.drawer-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+/* 3. PANEL GESER (Isinya) */
+.drawer-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 600px; /* Lebar panel */
+  max-width: 90vw; /* Responsif HP */
+  height: 100%;
+  background: #0a0a0a;
+  border-left: 1px solid var(--accent-color);
+  transform: translateX(100%); /* Umpetin ke kanan */
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); /* Easing Mahal */
+  padding: 3rem;
+  overflow-y: auto; /* Biar bisa discroll kalo konten panjang */
+  pointer-events: auto; /* Panelnya harus bisa diklik */
+}
+
+/* --- STATE: OPEN (Pas Dibuka) --- */
+.drawer-container.open {
+  pointer-events: auto;
+}
+.drawer-container.open .drawer-backdrop {
+  opacity: 1;
+}
+.drawer-container.open .drawer-panel {
+  transform: translateX(0); /* Geser masuk */
+}
+
+/* 4. TOMBOL CLOSE */
+.drawer-close-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--accent-color);
+  font-family: "Courier New", monospace;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  transition: all 0.3s;
+}
+.drawer-close-btn:hover {
+  background: var(--accent-color);
+  color: black;
+}
+
+/* 5. BLUEPRINT STYLING (Isi Konten) */
+.blueprint-title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.blueprint-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  font-family: "Courier New", monospace;
+  font-size: 0.8rem;
+  color: var(--mist-color);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.status-live {
+  color: #4ade80;
+  margin-left: auto; /* Dorong ke kanan mentok */
+  font-weight: bold;
+}
+
+/* FRAME GAMBAR */
+.blueprint-frame {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+.blueprint-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.frame-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.2) 50%);
+  background-size: 100% 4px; /* Efek garis scanline TV */
+  pointer-events: none;
+}
+
+/* SPECS GRID */
+.specs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+.spec-label {
+  display: block;
+  font-family: "Courier New", monospace;
+  color: var(--accent-color);
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+.spec-desc {
+  font-size: 0.95rem;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+/* TECH TAGS */
+.tech-row {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1.5rem;
+}
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+.tech-tags span {
+  border: 1px solid #333;
+  padding: 0.2rem 0.8rem;
+  font-family: "Courier New", monospace;
+  font-size: 0.8rem;
+  color: var(--mist-color);
+}
+
+/* HELPER: Hidden/Show */
+.drawer-content.hidden {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .specs-grid {
+    grid-template-columns: 1fr; /* Stack di HP */
+  }
+  .drawer-panel {
+    padding: 1.5rem;
+  }
+}
