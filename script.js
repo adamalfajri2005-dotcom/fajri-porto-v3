@@ -402,3 +402,42 @@ if (blastDoor) {
     },
   });
 }
+
+// =========================================
+// HERO SPLIT SCROLL + DESC REVEAL
+// =========================================
+const wordLeft = document.querySelector(".word-left");
+const wordRight = document.querySelector(".word-right");
+const heroDesc = document.querySelector(".hero-reveal-desc"); // Ambil elemen deskripsi
+const heroSection = document.querySelector(".hero-section");
+
+if (wordLeft && wordRight && heroSection) {
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: heroSection,
+      start: "top top",
+      end: "bottom top",
+      scrub: 1,
+    },
+  });
+
+  // 1. ADAM Geser Kiri
+  tl.to(wordLeft, { xPercent: -60, autoAlpha: 0 }, 0);
+
+  // 2. ALFAJRI Geser Kanan
+  tl.to(wordRight, { xPercent: 60, autoAlpha: 0 }, 0);
+
+  // 3. DESKRIPSI MUNCUL (Fade In + Turun dikit ke posisi normal)
+  if (heroDesc) {
+    tl.to(
+      heroDesc,
+      {
+        autoAlpha: 1,
+        y: "-50%", // Balik ke tengah vertikal
+        scale: 1.1, // Zoom in dikit biar dramatis
+        duration: 0.5,
+      },
+      0,
+    ); // "0" biar barengan sama nama yg misah
+  }
+}

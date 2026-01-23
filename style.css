@@ -1578,3 +1578,92 @@ p,
   position: relative;
   z-index: 5;
 }
+
+/* =========================================
+   HERO GATE OPENER (SPLIT SCROLL)
+   ========================================= */
+
+/* Wrapper biar konten di tengah */
+.hero-center-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh; /* Menuhin layar */
+  text-align: center;
+  position: relative;
+  overflow: hidden; /* Biar pas geser ga bikin scroll samping */
+}
+
+/* Judul Utama */
+.split-hero-title {
+  display: flex;
+  flex-direction: column; /* Stacked (Atas Bawah) */
+  align-items: center;
+  justify-content: center;
+  line-height: 0.85; /* Rapet biar solid */
+}
+
+/* Kata "ADAM" dan "ALFAJRI" */
+.hero-word {
+  font-family: var(--font-display); /* Pake font Clash Display lu */
+  font-size: 15vw; /* UKURAN RAKSASA RESPONSIF */
+  font-weight: 800;
+  color: #e0e0e0;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+
+  /* Hardware acc biar smooth pas gerak */
+  will-change: transform;
+}
+
+/* Subtitle Kecil di Bawah */
+.hero-center-subtitle {
+  margin-top: 3rem;
+  font-family: "Courier New", monospace;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  color: var(--accent-color);
+  animation: blink 2s infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* --- HERO REVEAL DESCRIPTION --- */
+.hero-reveal-desc {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Pas di tengah layar */
+  text-align: center;
+  width: 80%;
+  z-index: -1; /* Di belakang teks nama */
+
+  /* Font Styling */
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+  letter-spacing: 2px;
+  line-height: 1.5;
+
+  /* STATE AWAL: NGUMPET */
+  opacity: 0;
+  transform: translate(
+    -50%,
+    -40%
+  ); /* Agak naik dikit biar nanti turun pas muncul */
+}
+
+.hero-reveal-desc p {
+  margin: 0;
+  background: #000; /* Background hitam biar teks nama ga nabrak pas lewat */
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+}
