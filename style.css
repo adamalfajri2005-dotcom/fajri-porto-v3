@@ -21,17 +21,6 @@
   font-family: "Space Mono", monospace !important;
 }
 
-/* 2. Rapatkan Huruf Judul (Biar Solid) */
-.hero-word,
-.card-name {
-  letter-spacing: -0.06em !important; /* Hurufnya jadi dempet keren */
-}
-
-/* 3. Teks paragraf biasa lebih enak dibaca */
-p {
-  line-height: 1.6; /* Napas antar baris */
-}
-
 /* --- LENIS SMOOTH SCROLL SETUP --- */
 html.lenis,
 html.lenis body {
