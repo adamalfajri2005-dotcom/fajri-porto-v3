@@ -6,6 +6,30 @@
   --mist-color: #888888;
   --font-display: "Clash Display", sans-serif;
   --font-body: "Satoshi", sans-serif;
+  --font-mono: "Space Mono", monospace; /* Bye-bye Courier New */
+}
+
+/* 1. Paksa elemen ini pake Space Mono (Font Hacker) */
+.hero-reveal-desc,
+.rank-label,
+.id-serial,
+.info-text,
+.tag,
+.hero-center-subtitle,
+.code-snippet {
+  /* Kalau ada */
+  font-family: "Space Mono", monospace !important;
+}
+
+/* 2. Rapatkan Huruf Judul (Biar Solid) */
+.hero-word,
+.card-name {
+  letter-spacing: -0.06em !important; /* Hurufnya jadi dempet keren */
+}
+
+/* 3. Teks paragraf biasa lebih enak dibaca */
+p {
+  line-height: 1.6; /* Napas antar baris */
 }
 
 /* --- LENIS SMOOTH SCROLL SETUP --- */
