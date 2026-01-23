@@ -443,100 +443,110 @@ if (wordLeft && wordRight && heroSection) {
 }
 
 // =========================================
-// HOLOGRAPHIC SPHERE ANIMATION (3D CORE)
+// THE KINETIC GRID (ELEGANT RIPPLE)
 // =========================================
 const canvas = document.getElementById("neuro");
 const ctx = canvas.getContext("2d");
 
+// Setting Ukuran
 let width, height;
-let particles = [];
-
-// Settingan Bola
-const PARTICLE_COUNT = 400; // Jumlah titik (Makin banyak makin padet)
-const RADIUS = 250; // Besar bola
-const ROTATION_SPEED = 0.002; // Kecepatan muter
-
-// Resize Handle
 function resize() {
   width = window.innerWidth;
   height = window.innerHeight;
   canvas.width = width;
   canvas.height = height;
+  initGrid(); // Reset grid pas resize
 }
 window.addEventListener("resize", resize);
-resize();
 
-// Class Partikel 3D
-class Particle3D {
-  constructor() {
-    // Sebar titik di permukaan bola (Math magic)
-    const theta = Math.random() * Math.PI * 2; // Sudut horizontal
-    const phi = Math.acos(Math.random() * 2 - 1); // Sudut vertikal
+// Mouse Handling
+const mouse = { x: undefined, y: undefined, radius: 150 }; // Radius efek magnet
+window.addEventListener("mousemove", (e) => {
+  mouse.x = e.x;
+  mouse.y = e.y;
+});
 
-    this.x = RADIUS * Math.sin(phi) * Math.cos(theta);
-    this.y = RADIUS * Math.sin(phi) * Math.sin(theta);
-    this.z = RADIUS * Math.cos(phi);
+// Grid System
+let dots = [];
+const SPACING = 40; // Jarak antar titik (Makin gede makin renggang/minimalis)
 
-    this.color = "#ff3300"; // Warna Oranye
-    this.size = 1.5; // Ukuran titik
+class Dot {
+  constructor(x, y) {
+    this.originX = x; // Posisi asli
+    this.originY = y;
+    this.x = x; // Posisi saat ini
+    this.y = y;
+    this.vx = 0; // Velocity (Kecepatan)
+    this.vy = 0;
+    this.friction = 0.9; // Kekentalan (0.9 = Licin, 0.5 = Berat)
+    this.ease = 0.1; // Kecepatan balik ke asal
   }
 
-  // Fungsi Rotasi (Matematika 3D ke 2D)
-  rotate(angle) {
-    const cos = Math.cos(angle);
-    const sin = Math.sin(angle);
-
-    // Rotasi sumbu Y (Muter horizontal)
-    const x = this.x * cos - this.z * sin;
-    const z = this.x * sin + this.z * cos;
-
-    this.x = x;
-    this.z = z;
-  }
-
-  draw(ctx, centerX, centerY) {
-    // Efek Perspektif (Biar yang depan gede, yang belakang kecil)
-    const scale = 300 / (300 + this.z); // Depth factor
-    const alpha = Math.max(0.1, scale - 0.2); // Transparansi berdasar kedalaman
-
+  draw() {
     ctx.beginPath();
-    ctx.arc(
-      centerX + this.x * scale,
-      centerY + this.y * scale,
-      this.size * scale,
-      0,
-      Math.PI * 2,
-    );
-    ctx.fillStyle = `rgba(255, 51, 0, ${alpha})`; // Oranye transparan
+    // Titik Kecil Elegan
+    ctx.arc(this.x, this.y, 1.5, 0, Math.PI * 2);
+    ctx.fillStyle = "rgba(255, 255, 255, 0.15)"; // Putih transparan (Subtle)
     ctx.fill();
   }
-}
 
-// Init Partikel
-function init() {
-  particles = [];
-  for (let i = 0; i < PARTICLE_COUNT; i++) {
-    particles.push(new Particle3D());
+  update() {
+    // 1. Hitung Jarak Mouse ke Titik
+    const dx = mouse.x - this.x;
+    const dy = mouse.y - this.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    // 2. Efek Magnet (Repulsion)
+    if (distance < mouse.radius) {
+      const forceDirectionX = dx / distance;
+      const forceDirectionY = dy / distance;
+      const force = (mouse.radius - distance) / mouse.radius; // Makin deket makin kuat
+      const directionX = forceDirectionX * force * 5; // Kekuatan dorong
+      const directionY = forceDirectionY * force * 5;
+
+      // Dorong titik menjauh dari mouse
+      this.vx -= directionX;
+      this.vy -= directionY;
+    }
+
+    // 3. Fisika Balik ke Asal (Spring Physics)
+    const returnX = (this.originX - this.x) * this.ease;
+    const returnY = (this.originY - this.y) * this.ease;
+
+    this.vx += returnX;
+    this.vy += returnY;
+
+    // 4. Terapkan Gesekan (Biar ga gerak selamanya)
+    this.vx *= this.friction;
+    this.vy *= this.friction;
+
+    // 5. Update Posisi
+    this.x += this.vx;
+    this.y += this.vy;
+
+    this.draw();
   }
 }
 
-// Loop Animasi
+function initGrid() {
+  dots = [];
+  // Bikin Grid Rapi
+  for (let x = 0; x < width; x += SPACING) {
+    for (let y = 0; y < height; y += SPACING) {
+      dots.push(new Dot(x, y));
+    }
+  }
+}
+
 function animate() {
   ctx.clearRect(0, 0, width, height);
 
-  // Titik Tengah Layar
-  const centerX = width / 2;
-  const centerY = height / 2;
-
-  // Putar & Gambar setiap partikel
-  particles.forEach((p) => {
-    p.rotate(ROTATION_SPEED);
-    p.draw(ctx, centerX, centerY);
-  });
+  // Update semua titik
+  dots.forEach((dot) => dot.update());
 
   requestAnimationFrame(animate);
 }
 
-// Jalankan
-init();
+// Start
+resize();
 animate();
