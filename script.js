@@ -300,3 +300,31 @@ function closeDrawer() {
   // 2. Balikin scroll body
   document.body.style.overflow = "auto";
 }
+
+// =========================================
+// POWER USER SHORTCUTS (KEYBOARD CONTROL)
+// =========================================
+document.addEventListener("keydown", (e) => {
+  // 1. TOMBOL ESCAPE (Hukum Wajib UX: Escape = Keluar/Tutup)
+  if (e.key === "Escape") {
+    // Cek apakah Drawer lagi kebuka? Kalau iya, tutup.
+    const drawer = document.getElementById("project-drawer");
+    const menuPanel = document.getElementById("menu-panel"); // Asumsi lu pake menu panel yg tadi
+
+    if (drawer.classList.contains("open")) {
+      closeDrawer();
+      console.log("CMD: DRAWER_CLOSED");
+    } else if (menuPanel && menuPanel.classList.contains("active")) {
+      // Tutup menu kalau ada fungsi tutup menu
+      menuPanel.classList.remove("active");
+    }
+  }
+
+  // 2. TOMBOL 'M' (Menu Toggle)
+  // (Opsional: Kalau lu mau user bisa buka menu pake M)
+  if (e.key === "m" || e.key === "M") {
+    // Masukin logika buka menu lu di sini (contoh simulasi klik tombol menu)
+    const menuBtn = document.querySelector(".menu-btn");
+    if (menuBtn) menuBtn.click();
+  }
+});
