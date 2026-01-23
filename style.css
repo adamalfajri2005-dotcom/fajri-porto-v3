@@ -1187,3 +1187,61 @@ a {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent-color); /* Jadi Oren pas disentuh */
 }
+
+/* =========================================
+   AGENCY GRADE TYPOGRAPHY TUNING (FINAL POLISH)
+   ========================================= */
+
+/* 1. RENDERING ENGINE (Biar Teks Tajam di Dark Mode) */
+html,
+body {
+  -webkit-font-smoothing: antialiased; /* Wajib buat Mac/iOS */
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility; /* Biar browser ngerender font terbaik */
+}
+
+/* 2. HEADINGS (Judul Besar) -> RAPATKAN */
+/* Kesannya: Solid, Kuat, Tegas */
+h1,
+h2,
+h3,
+.section-title,
+.footer-brand,
+.hero-title,
+.big-title {
+  letter-spacing: -0.03em; /* Tarik dikit biar nempel */
+}
+
+/* 3. LABELS (Tulisan Kecil Kapital) -> RENGGANGKAN */
+/* Kesannya: Teknikal, Spesifik, Kayak Serial Number */
+.section-label,
+.col-label,
+.data-label,
+.footer-cta-label,
+.menu-text,
+.tag,
+.card-label {
+  letter-spacing: 0.15em; /* Kasih napas antar huruf */
+  text-transform: uppercase; /* Pastiin kapital */
+  font-weight: 600;
+}
+
+/* 4. BODY TEXT (Paragraf) -> LEGA & NYAMAN */
+/* Jangan pake Putih Bersih (#FFFFFF) di background hitam, bikin mata sakit */
+p,
+.about-text,
+.footer-bio,
+.footer-links a,
+.footer-info li,
+.info-text {
+  line-height: 1.7; /* Jarak antar baris dibikin lega */
+  color: rgba(255, 255, 255, 0.85); /* Putihnya diturunin ke 85% biar adem */
+}
+
+/* 5. MONOSPACE (Font Coding) -> TUNE UP */
+.footer-bio,
+.footer-bottom-bar,
+#toast,
+.role-badge {
+  font-variant-numeric: tabular-nums; /* Biar angka lurus sejajar (penting buat engineer) */
+}
