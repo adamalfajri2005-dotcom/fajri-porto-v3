@@ -1453,31 +1453,47 @@ p,
   filter: grayscale(100%) contrast(1.1); /* Hitam putih tajam */
 }
 
-/* FLOATING RANK (Gantiin Blok Oranye) */
+/* --- THE HUD DATA STYLE (REVISION) --- */
+
 .floating-rank {
   position: absolute;
-  bottom: 1.5rem;
-  left: 1.5rem;
-  background: rgba(0, 0, 0, 0.8); /* Transparan gelap */
-  backdrop-filter: blur(5px);
-  border: 1px solid var(--accent-color); /* Garis oranye tipis */
-  padding: 0.5rem 1rem;
+  bottom: 2rem;
+  left: 2rem;
+
+  /* HAPUS BACKGROUND KOTAK & BORDER KOTAK */
+  background: transparent;
+  border: none;
+
+  /* GANTI JADI GARIS AKSEN VERTIKAL */
+  border-left: 3px solid var(--accent-color);
+
+  padding: 0;
+  padding-left: 1rem; /* Jarak teks dari garis oranye */
   display: flex;
   flex-direction: column;
+  gap: 0.2rem;
+
+  /* Bayangan teks biar tetep kebaca di baju gelap */
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.8);
 }
 
 .rank-label {
   font-family: "Courier New", monospace;
-  font-size: 0.6rem;
-  color: var(--accent-color);
-  letter-spacing: 1px;
+  font-size: 0.75rem;
+  color: var(--accent-color); /* Warna Oranye */
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+  opacity: 1;
 }
 
 .rank-value {
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: 1.5rem; /* Gedebin dikit biar gagah */
   color: #fff;
   font-weight: 700;
+  line-height: 1;
+  letter-spacing: 1px;
 }
 
 /* SISI INFO */
