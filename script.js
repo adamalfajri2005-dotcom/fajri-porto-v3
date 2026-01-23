@@ -328,3 +328,50 @@ document.addEventListener("keydown", (e) => {
     if (menuBtn) menuBtn.click();
   }
 });
+
+// =========================================
+// SCROLL SPY (SECTION TRACKING)
+// =========================================
+const sections = document.querySelectorAll("section"); // Pastiin section lu punya tag <section>
+const navLinks = document.querySelectorAll(".menu-link"); // Link di menu lu
+
+const observerOptions = {
+  threshold: 0.3, // Trigger pas 30% section kelihatan
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      // 1. Dapet ID section yang lagi aktif (misal: 'work')
+      const currentId = entry.target.getAttribute("id");
+
+      // 2. (Opsional) Update URL tanpa reload biar bisa dicopy
+      // history.replaceState(null, null, `#${currentId}`);
+
+      // 3. Highlight Menu (Kalau lu mau menu-nya nyala)
+      // Logic: Cari link yang href-nya cocok sama id, kasih class active
+      console.log("USER IS READING: " + currentId.toUpperCase());
+    }
+  });
+}, observerOptions);
+
+sections.forEach((section) => {
+  observer.observe(section);
+});
+
+// =========================================
+// OUTSIDE CLICK (UX SAFETY NET)
+// =========================================
+document.addEventListener("click", (e) => {
+  const menuPanel = document.getElementById("menu-panel");
+  const menuBtn = document.querySelector(".menu-btn"); // Tombol pemicu
+
+  // Cek: Kalau menu lagi aktif...
+  if (menuPanel && menuPanel.classList.contains("active")) {
+    // ...DAN yang diklik BUKAN menu panel DAN BUKAN tombol menu
+    if (!menuPanel.contains(e.target) && !menuBtn.contains(e.target)) {
+      // Tutup Menu
+      menuPanel.classList.remove("active");
+    }
+  }
+});
