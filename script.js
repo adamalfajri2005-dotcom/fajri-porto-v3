@@ -375,3 +375,30 @@ document.addEventListener("click", (e) => {
     }
   }
 });
+
+// =========================================
+// BLAST DOOR EFFECT (SCROLL REVEAL)
+// =========================================
+
+// Kita cek dulu elemennya ada ga
+const blastDoor = document.querySelector(".blast-door");
+
+if (blastDoor) {
+  // Set state awal: TERTUTUP (Dipotong habis dari kanan)
+  gsap.set(blastDoor, {
+    clipPath: "inset(0 100% 0 0)", // Artinya: Kanan kepotong 100%
+  });
+
+  // Animasi Buka Tutup
+  gsap.to(blastDoor, {
+    clipPath: "inset(0 0% 0 0)", // Target: Kanan kepotong 0% (Kelihatan Full)
+    ease: "none", // Gerakan linear ngikutin scroll (jangan pake elastic)
+    scrollTrigger: {
+      trigger: blastDoor,
+      start: "top 85%", // Mulai buka pas elemen nongol dikit di bawah
+      end: "center center", // Selesai buka pas elemen di tengah layar
+      scrub: 1, // PENTING: Angka 1 bikin ada delay halus (smooth) pas nge-scrub
+      // markers: true, // Hapus komen ini kalo mau liat garis debug
+    },
+  });
+}

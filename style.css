@@ -1564,3 +1564,17 @@ p,
     font-size: 3rem;
   }
 }
+
+/* =========================================
+   BLAST DOOR REVEAL (Running Text Effect)
+   ========================================= */
+
+.blast-door {
+  /* 1. Hardware Acceleration (Biar licin di HP) */
+  will-change: clip-path;
+
+  /* 2. PENTING: Pastiin dia punya background atau layer sendiri */
+  /* Kalau transparan, efeknya kurang kerasa. Kalau mau tetep transparan gapapa */
+  position: relative;
+  z-index: 5;
+}
