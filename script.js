@@ -443,145 +443,100 @@ if (wordLeft && wordRight && heroSection) {
 }
 
 // =========================================
-// NEURAL NETWORK ANIMATION (BACKGROUND)
+// HOLOGRAPHIC SPHERE ANIMATION (3D CORE)
 // =========================================
 const canvas = document.getElementById("neuro");
 const ctx = canvas.getContext("2d");
 
-// Setting Ukuran Kanvas Full Screen
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+let width, height;
+let particles = [];
 
-let particlesArray;
+// Settingan Bola
+const PARTICLE_COUNT = 400; // Jumlah titik (Makin banyak makin padet)
+const RADIUS = 250; // Besar bola
+const ROTATION_SPEED = 0.002; // Kecepatan muter
 
-// Handle Mouse
-let mouse = {
-  x: null,
-  y: null,
-  radius: (canvas.height / 80) * (canvas.width / 80),
-};
+// Resize Handle
+function resize() {
+  width = window.innerWidth;
+  height = window.innerHeight;
+  canvas.width = width;
+  canvas.height = height;
+}
+window.addEventListener("resize", resize);
+resize();
 
-window.addEventListener("mousemove", (event) => {
-  mouse.x = event.x;
-  mouse.y = event.y;
-});
+// Class Partikel 3D
+class Particle3D {
+  constructor() {
+    // Sebar titik di permukaan bola (Math magic)
+    const theta = Math.random() * Math.PI * 2; // Sudut horizontal
+    const phi = Math.acos(Math.random() * 2 - 1); // Sudut vertikal
 
-// Create Particle
-class Particle {
-  constructor(x, y, directionX, directionY, size, color) {
-    this.x = x;
-    this.y = y;
-    this.directionX = directionX;
-    this.directionY = directionY;
-    this.size = size;
-    this.color = color;
+    this.x = RADIUS * Math.sin(phi) * Math.cos(theta);
+    this.y = RADIUS * Math.sin(phi) * Math.sin(theta);
+    this.z = RADIUS * Math.cos(phi);
+
+    this.color = "#ff3300"; // Warna Oranye
+    this.size = 1.5; // Ukuran titik
   }
-  // Method to draw individual particle
-  draw() {
+
+  // Fungsi Rotasi (Matematika 3D ke 2D)
+  rotate(angle) {
+    const cos = Math.cos(angle);
+    const sin = Math.sin(angle);
+
+    // Rotasi sumbu Y (Muter horizontal)
+    const x = this.x * cos - this.z * sin;
+    const z = this.x * sin + this.z * cos;
+
+    this.x = x;
+    this.z = z;
+  }
+
+  draw(ctx, centerX, centerY) {
+    // Efek Perspektif (Biar yang depan gede, yang belakang kecil)
+    const scale = 300 / (300 + this.z); // Depth factor
+    const alpha = Math.max(0.1, scale - 0.2); // Transparansi berdasar kedalaman
+
     ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-    ctx.fillStyle = "#ff3300"; // Warna Oranye (Accent Lu)
+    ctx.arc(
+      centerX + this.x * scale,
+      centerY + this.y * scale,
+      this.size * scale,
+      0,
+      Math.PI * 2,
+    );
+    ctx.fillStyle = `rgba(255, 51, 0, ${alpha})`; // Oranye transparan
     ctx.fill();
   }
-  // Check particle position, check mouse position, move the particle, draw the particle
-  update() {
-    if (this.x > canvas.width || this.x < 0) {
-      this.directionX = -this.directionX;
-    }
-    if (this.y > canvas.height || this.y < 0) {
-      this.directionY = -this.directionY;
-    }
-
-    // Check collision detection - mouse position / particle position
-    let dx = mouse.x - this.x;
-    let dy = mouse.y - this.y;
-    let distance = Math.sqrt(dx * dx + dy * dy);
-
-    if (distance < mouse.radius + this.size) {
-      if (mouse.x < this.x && this.x < canvas.width - this.size * 10) {
-        this.x += 10;
-      }
-      if (mouse.x > this.x && this.x > this.size * 10) {
-        this.x -= 10;
-      }
-      if (mouse.y < this.y && this.y < canvas.height - this.size * 10) {
-        this.y += 10;
-      }
-      if (mouse.y > this.y && this.y > this.size * 10) {
-        this.y -= 10;
-      }
-    }
-    this.x += this.directionX;
-    this.y += this.directionY;
-
-    this.draw();
-  }
 }
 
-// Create particle array
+// Init Partikel
 function init() {
-  particlesArray = [];
-  // Jumlah partikel (makin gede angka bagi, makin dikit partikelnya)
-  let numberOfParticles = (canvas.height * canvas.width) / 9000;
-
-  for (let i = 0; i < numberOfParticles; i++) {
-    let size = Math.random() * 2 + 1; // Ukuran random
-    let x = Math.random() * (innerWidth - size * 2 - size * 2) + size * 2;
-    let y = Math.random() * (innerHeight - size * 2 - size * 2) + size * 2;
-    let directionX = Math.random() * 2 - 1; // Speed Random
-    let directionY = Math.random() * 2 - 1;
-    let color = "#ff3300";
-
-    particlesArray.push(
-      new Particle(x, y, directionX, directionY, size, color),
-    );
+  particles = [];
+  for (let i = 0; i < PARTICLE_COUNT; i++) {
+    particles.push(new Particle3D());
   }
 }
 
-// Connect points with lines
-function connect() {
-  let opacityValue = 1;
-  for (let a = 0; a < particlesArray.length; a++) {
-    for (let b = a; b < particlesArray.length; b++) {
-      let distance =
-        (particlesArray[a].x - particlesArray[b].x) *
-          (particlesArray[a].x - particlesArray[b].x) +
-        (particlesArray[a].y - particlesArray[b].y) *
-          (particlesArray[a].y - particlesArray[b].y);
-
-      // Jarak koneksi (kalo deketan baru ditarik garis)
-      if (distance < (canvas.width / 7) * (canvas.height / 7)) {
-        opacityValue = 1 - distance / 20000;
-        ctx.strokeStyle = "rgba(255, 255, 255," + opacityValue + ")"; // Warna Garis Putih
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-        ctx.stroke();
-      }
-    }
-  }
-}
-
-// Animation Loop
+// Loop Animasi
 function animate() {
-  requestAnimationFrame(animate);
-  ctx.clearRect(0, 0, innerWidth, innerHeight);
+  ctx.clearRect(0, 0, width, height);
 
-  for (let i = 0; i < particlesArray.length; i++) {
-    particlesArray[i].update();
-  }
-  connect();
+  // Titik Tengah Layar
+  const centerX = width / 2;
+  const centerY = height / 2;
+
+  // Putar & Gambar setiap partikel
+  particles.forEach((p) => {
+    p.rotate(ROTATION_SPEED);
+    p.draw(ctx, centerX, centerY);
+  });
+
+  requestAnimationFrame(animate);
 }
 
-// Resize Event
-window.addEventListener("resize", () => {
-  canvas.width = innerWidth;
-  canvas.height = innerHeight;
-  mouse.radius = (canvas.height / 80) * (canvas.height / 80);
-  init();
-});
-
-// Run
+// Jalankan
 init();
 animate();
