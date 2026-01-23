@@ -1680,3 +1680,15 @@ p,
   display: inline-block;
   padding: 0.2rem 0.5rem;
 }
+
+/* --- NEURAL NETWORK BACKGROUND --- */
+#neuro {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* PENTING: Biar ada di belakang teks */
+  opacity: 0.15; /* Transparan tipis biar ga ganggu teks utama */
+  pointer-events: none; /* Biar mouse tetep bisa ngeklik teks di depannya */
+}
