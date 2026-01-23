@@ -215,36 +215,36 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// --- 8. PROFILE CARD REVEAL ANIMATION (NEW) ---
-const profileSection = document.querySelector(".profile-section");
+// =========================================
+// ENGINEER CARD REVEAL (THE CENTER UNVEIL)
+// =========================================
+
 const engineerCard = document.querySelector(".engineer-card");
 
-if (profileSection && engineerCard) {
-  const profileTl = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".profile-section",
-      start: "top 70%",
-      toggleActions: "play none none reverse",
-    },
-  });
-
-  profileTl.from(engineerCard, {
-    y: 100,
-    opacity: 0,
-    duration: 1,
-    ease: "power3.out",
-  });
-
-  profileTl.from(
-    [".card-photo-side", ".info-header", ".info-body", ".info-footer"],
+if (engineerCard) {
+  gsap.fromTo(
+    engineerCard,
     {
-      y: 30,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.2,
-      ease: "power3.out",
+      // STATE AWAL (SEBELUM MUNCUL)
+      clipPath: "inset(0% 50% 0% 50%)", // Tertutup rapat di tengah (Kiri 50%, Kanan 50%)
+      scale: 0.9, // Agak kecil (mundur)
+      autoAlpha: 0, // Transparan
+      y: 50, // Turun dikit (muncul dari bawah)
     },
-    "-=0.5",
+    {
+      // STATE AKHIR (MUNCUL FULL)
+      clipPath: "inset(0% 0% 0% 0%)", // Terbuka full
+      scale: 1, // Ukuran normal
+      autoAlpha: 1, // Jelas
+      y: 0, // Posisi normal
+      ease: "power3.out", // Easing smooth mahal
+      scrollTrigger: {
+        trigger: engineerCard,
+        start: "top 85%", // Mulai pas card-nya nongol dikit
+        end: "top 40%", // Selesai pas card di tengah layar
+        scrub: 1, // Animasi ngikutin jempol scroll (Maju-Mundur)
+      },
+    },
   );
 }
 
